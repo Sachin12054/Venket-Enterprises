@@ -314,75 +314,24 @@ p {
 /* ===== HERO SECTION ===== */
 .hero {
     position: relative;
-    height: 100vh;
-    min-height: 600px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-}
-
-.hero-slider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-}
-
-.slide.active {
-    opacity: 1;
-}
-
-.slide-bg {
-    width: 100%;
-    height: 100%;
+    height: 70vh;
+    min-height: 500px;
+    background: linear-gradient(135deg, rgba(52, 73, 94, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    animation: ken-burns 20s infinite;
-}
-
-@keyframes ken-burns {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-.slide-content {
-    position: relative;
-    height: 100%;
     display: flex;
     align-items: center;
-    z-index: 2;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-white);
+    padding: var(--section-padding);
 }
 
-.slide-text {
-    max-width: 600px;
-    padding: 0 20px;
-    animation: slideInUp 1s ease-out;
+.hero-content {
+    max-width: 800px;
 }
 
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.slide-badge {
+.hero-badge {
     display: inline-block;
     padding: 8px 16px;
     background: rgba(230, 126, 34, 0.9);
@@ -394,81 +343,73 @@ p {
     backdrop-filter: blur(10px);
 }
 
-.slide-text h2 {
-    color: var(--text-white);
+.hero-text h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 700;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.slide-text p {
-    color: rgba(255, 255, 255, 0.9);
+.hero-text p {
     font-size: 1.2rem;
     margin-bottom: 30px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.slide-buttons {
+.hero-buttons {
     display: flex;
     gap: 20px;
-    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.hero-controls {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 30px;
-    transform: translateY(-50%);
-    z-index: 3;
+/* ===== FEATURED SOLUTIONS SECTION ===== */
+.featured-solutions {
+    padding: var(--section-padding);
+    background: var(--bg-light);
 }
 
-.hero-prev,
-.hero-next {
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
+.solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.solution-card {
+    background: var(--bg-white);
+    border-radius: var(--border-radius-large);
+    padding: 30px;
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+}
+
+.solution-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-medium);
+}
+
+.solution-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--text-white);
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: var(--transition);
-    backdrop-filter: blur(10px);
+    font-size: 1.5rem;
+    margin: 0 auto 20px;
 }
 
-.hero-prev:hover,
-.hero-next:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
+.solution-card h3 {
+    color: var(--text-dark);
+    margin-bottom: 15px;
 }
 
-.hero-indicators {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    z-index: 3;
-}
-
-.indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.indicator.active,
-.indicator:hover {
-    background: var(--text-white);
-    transform: scale(1.2);
+.solution-card p {
+    color: var(--text-medium);
+    line-height: 1.6;
 }
 
 /* ===== SECTION HEADERS ===== */

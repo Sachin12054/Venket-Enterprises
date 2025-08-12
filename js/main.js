@@ -1,7 +1,6 @@
 // ===== MAIN APPLICATION =====
 class VenkatEnterprisesApp {
     constructor() {
-        this.currentSlide = 0;
         this.products = [];
         this.filteredProducts = [];
         this.productsPerPage = 12;
@@ -15,7 +14,6 @@ class VenkatEnterprisesApp {
         this.initProducts();
         this.initEventListeners();
         this.initAnimations();
-        this.initSlider();
         this.hidePreloader();
     }
 
@@ -197,14 +195,7 @@ class VenkatEnterprisesApp {
 
     // ===== NAVIGATION =====
     initNavigation() {
-        const navToggle = document.querySelector('.nav-toggle');
-        const nav = document.querySelector('.nav');
         const navLinks = document.querySelectorAll('.nav-link');
-
-        navToggle?.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            navToggle.classList.toggle('active');
-        });
 
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
@@ -215,9 +206,6 @@ class VenkatEnterprisesApp {
                 if (targetSection) {
                     navLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
-                    
-                    nav.classList.remove('active');
-                    navToggle.classList.remove('active');
                     
                     targetSection.scrollIntoView({
                         behavior: 'smooth',
@@ -284,64 +272,6 @@ class VenkatEnterprisesApp {
                 header.classList.remove('scrolled');
             }
         }, 100));
-    }
-
-    // ===== SLIDER =====
-    initSlider() {
-        const slides = document.querySelectorAll('.slide');
-        const indicators = document.querySelectorAll('.indicator');
-        const prevBtn = document.querySelector('.hero-prev');
-        const nextBtn = document.querySelector('.hero-next');
-        
-        if (slides.length === 0) return;
-
-        const showSlide = (index) => {
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-            });
-            indicators.forEach((indicator, i) => {
-                indicator.classList.toggle('active', i === index);
-            });
-        };
-
-        const nextSlide = () => {
-            this.currentSlide = (this.currentSlide + 1) % slides.length;
-            showSlide(this.currentSlide);
-        };
-
-        const prevSlide = () => {
-            this.currentSlide = (this.currentSlide - 1 + slides.length) % slides.length;
-            showSlide(this.currentSlide);
-        };
-
-        let slideInterval = setInterval(nextSlide, 5000);
-
-        nextBtn?.addEventListener('click', () => {
-            clearInterval(slideInterval);
-            nextSlide();
-            slideInterval = setInterval(nextSlide, 5000);
-        });
-
-        prevBtn?.addEventListener('click', () => {
-            clearInterval(slideInterval);
-            prevSlide();
-            slideInterval = setInterval(nextSlide, 5000);
-        });
-
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                clearInterval(slideInterval);
-                this.currentSlide = index;
-                showSlide(this.currentSlide);
-                slideInterval = setInterval(nextSlide, 5000);
-            });
-        });
-
-        const heroSection = document.querySelector('.hero');
-        heroSection?.addEventListener('mouseenter', () => clearInterval(slideInterval));
-        heroSection?.addEventListener('mouseleave', () => {
-            slideInterval = setInterval(nextSlide, 5000);
-        });
     }
 
     // ===== PRODUCT FILTERS =====
@@ -512,47 +442,42 @@ class VenkatEnterprisesApp {
                 background: var(--primary-color);
                 color: white;
                 padding: 5px 10px;
-                border-radius: 15px;
-                font-size: 0.8rem;
-                font-weight: 500;
-            }
-            
-            .product-card {
-                position: relative;
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    // ===== UTILITY FUNCTIONS =====
-    debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    throttle(func, limit) {
-        let inThrottle;
-        return function() {
-            const args = arguments;
-            const context = this;
-            if (!inThrottle) {
-                func.apply(context, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    }
+border-radius: 15px;
+font-size: 0.8rem;
+font-weight: 500;
 }
-
-// ===== INITIALIZATION =====
+.product-card {
+position: relative;
+}
+`;
+document.head.appendChild(style);
+}
+// ===== UTILITY FUNCTIONS =====
+debounce(func, wait) {
+let timeout;
+return function executedFunction(...args) {
+const later = () => {
+clearTimeout(timeout);
+func(...args);
+};
+clearTimeout(timeout);
+timeout = setTimeout(later, wait);
+};
+}
+throttle(func, limit) {
+let inThrottle;
+return function() {
+const args = arguments;
+const context = this;
+if (!inThrottle) {
+func.apply(context, args);
+inThrottle = true;
+setTimeout(() => inThrottle = false, limit);
+}
+};
+}
+}// ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
-    const app = new VenkatEnterprisesApp();
-    window.venkatApp = app;
+const app = new VenkatEnterprisesApp();
+window.venkatApp = app;
 });
