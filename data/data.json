@@ -1,139 +1,416 @@
-[
-  {
-    "id": 1,
-    "name": "LED Tube Light",
-    "description": "Energy-efficient LED tube light with high brightness and long lifespan.",
-    "price": "450",
-    "category": "Lighting Solutions",
-    "tags": ["LED", "energy-saving", "lighting"],
-    "image": "https://example.com/images/led-tube-light.jpg"
-  },
-  {
-    "id": 2,
-    "name": "Smart Ceiling Light",
-    "description": "Wi-Fi-enabled smart ceiling light with adjustable brightness and color.",
-    "price": "2500",
-    "category": "Lighting Solutions",
-    "tags": ["smart", "ceiling", "LED"],
-    "image": "https://example.com/images/smart-ceiling-light.jpg"
-  },
-  {
-    "id": 3,
-    "name": "Industrial Flood Light",
-    "description": "Heavy-duty LED flood light for industrial and outdoor use.",
-    "price": "3500",
-    "category": "Lighting Solutions",
-    "tags": ["industrial", "flood", "outdoor"],
-    "image": "https://example.com/images/industrial-flood-light.jpg"
-  },
-  {
-    "id": 4,
-    "name": "Rechargeable Emergency Light",
-    "description": "Portable rechargeable emergency light with long battery backup.",
-    "price": "1200",
-    "category": "Lighting Solutions",
-    "tags": ["emergency", "rechargeable", "LED"],
-    "image": "https://example.com/images/emergency-light.jpg"
-  },
-  {
-    "id": 5,
-    "name": "Decorative Wall Lamp",
-    "description": "Modern wall-mounted decorative lamp for homes and offices.",
-    "price": "1800",
-    "category": "Lighting Solutions",
-    "tags": ["decorative", "wall", "LED"],
-    "image": "https://example.com/images/wall-lamp.jpg"
-  },
-
-  {
-    "id": 6,
-    "name": "Copper Electrical Wires",
-    "description": "High-quality copper electrical wires for residential and commercial use.",
-    "price": "50/meter",
-    "category": "Wiring & Cables",
-    "tags": ["copper", "wiring", "cables"],
-    "image": "https://example.com/images/copper-wire.jpg"
-  },
-  {
-    "id": 7,
-    "name": "Fiber Optic Cable",
-    "description": "High-speed fiber optic cable for data and networking.",
-    "price": "200/meter",
-    "category": "Wiring & Cables",
-    "tags": ["fiber", "network", "data"],
-    "image": "https://example.com/images/fiber-optic-cable.jpg"
-  },
-  {
-    "id": 8,
-    "name": "Armoured Power Cable",
-    "description": "Heavy-duty armoured cable for industrial power supply.",
-    "price": "350/meter",
-    "category": "Wiring & Cables",
-    "tags": ["armoured", "power", "cables"],
-    "image": "https://example.com/images/armoured-cable.jpg"
-  },
-  {
-    "id": 9,
-    "name": "PVC Insulated Wire",
-    "description": "Flexible PVC insulated wire for general electrical use.",
-    "price": "30/meter",
-    "category": "Wiring & Cables",
-    "tags": ["PVC", "insulated", "wiring"],
-    "image": "https://example.com/images/pvc-wire.jpg"
-  },
-  {
-    "id": 10,
-    "name": "Solar Cable",
-    "description": "Weather-resistant cable designed for solar power systems.",
-    "price": "120/meter",
-    "category": "Wiring & Cables",
-    "tags": ["solar", "renewable", "cables"],
-    "image": "https://example.com/images/solar-cable.jpg"
-  },
-
-  {
-    "id": 11,
-    "name": "MCB Circuit Breaker",
-    "description": "Miniature circuit breaker for home electrical safety.",
-    "price": "350",
-    "category": "Electrical Safety",
-    "tags": ["MCB", "breaker", "safety"],
-    "image": "https://example.com/images/mcb-breaker.jpg"
-  },
-  {
-    "id": 12,
-    "name": "RCCB Residual Current Breaker",
-    "description": "Protects against electric shocks and leakage currents.",
-    "price": "1450",
-    "category": "Electrical Safety",
-    "tags": ["RCCB", "breaker", "shock-protection"],
-    "image": "https://example.com/images/rccb-breaker.jpg"
-  },
-  {
-    "id": 13,
-    "name": "Surge Protector",
-    "description": "Prevents damage from sudden voltage spikes.",
-    "price": "900",
-    "category": "Electrical Safety",
-    "tags": ["surge", "protector", "safety"],
-    "image": "https://example.com/images/surge-protector.jpg"
-  },
-  {
-    "id": 14,
-    "name": "Industrial Fuse",
-    "description": "High-capacity fuse for industrial machinery protection.",
-    "price": "250",
-    "category": "Electrical Safety",
-    "tags": ["fuse", "industrial", "protection"],
-    "image": "https://example.com/images/industrial-fuse.jpg"
-  },
-  {
-    "id": 15,
-    "name": "Earthing Kit",
-    "description": "Complete earthing solution for residential and industrial buildings.",
-    "price": "3200",
-    "category": "Electrical Safety",
-    "tags": ["earthing", "safety", "grounding"],
-    "image": "https://example.com/images/earthing-kit.jpg"
-  }
-]
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Digital Auto Level",
+      "category": "Survey",
+      "price": 18500,
+      "description": "High precision digital auto level with automatic horizontal circle reading for accurate surveying.",
+      "image": "https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "featured": true,
+      "specifications": {
+        "accuracy": "±1.5mm/km",
+        "magnification": "32x",
+        "minimumFocusing": "0.3m",
+        "compensatorRange": "±15'"
+      },
+      "inStock": true
+    },
+    {
+      "id": 2,
+      "name": "Total Station",
+      "category": "Survey",
+      "price": 525000,
+      "description": "Advanced electronic total station with EDM for precise angle and distance measurements.",
+      "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "featured": true,
+      "specifications": {
+        "angleAccuracy": "±2\"",
+        "distanceAccuracy": "±(2mm + 2ppm)",
+        "range": "5000m",
+        "batteryLife": "24 hours"
+      },
+      "inStock": true
+    },
+    {
+      "id": 3,
+      "name": "Digital Theodolite",
+      "category": "Survey",
+      "price": 22000,
+      "description": "Professional digital theodolite with LCD display for accurate horizontal and vertical angle measurements.",
+      "image": "https://images.unsplash.com/photo-1581092162384-8987c1d64718?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "accuracy": "±2\"",
+        "magnification": "30x",
+        "minimumReading": "1\" / 5\"",
+        "display": "Dual LCD"
+      },
+      "inStock": true
+    },
+    {
+      "id": 4,
+      "name": "Handheld GPS",
+      "category": "Survey",
+      "price": 35000,
+      "description": "Rugged handheld GPS unit with high-sensitivity receiver for field surveying applications.",
+      "image": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "accuracy": "3-5 meters",
+        "channels": "12 channel",
+        "batteryLife": "22 hours",
+        "waterRating": "IPX7"
+      },
+      "inStock": true
+    },
+    {
+      "id": 5,
+      "name": "Laser Distance Meter",
+      "category": "Survey",
+      "price": 8500,
+      "description": "Compact laser distance meter for quick and accurate distance measurements up to 100m.",
+      "image": "https://images.unsplash.com/photo-1581092335878-4b1d70b6b1b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "range": "0.05-100m",
+        "accuracy": "±1.5mm",
+        "laserClass": "Class II",
+        "batteryLife": "5000 measurements"
+      },
+      "inStock": true
+    },
+    {
+      "id": 6,
+      "name": "Compression Testing Machine",
+      "category": "Civil QC Lab",
+      "price": 125000,
+      "description": "Digital compression testing machine for concrete cube and cylinder strength testing.",
+      "image": "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "featured": true,
+      "specifications": {
+        "capacity": "2000 kN",
+        "accuracy": "±1%",
+        "cubeSize": "150mm x 150mm",
+        "cylinderSize": "150mm dia x 300mm"
+      },
+      "inStock": true
+    },
+    {
+      "id": 7,
+      "name": "Electric Sieve Shaker",
+      "category": "Civil QC Lab",
+      "price": 28000,
+      "description": "Automatic electric sieve shaker for particle size analysis of aggregates and soil.",
+      "image": "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "sieveSize": "200mm & 300mm",
+        "timer": "0-99 minutes",
+        "amplitude": "Variable",
+        "power": "0.25 HP motor"
+      },
+      "inStock": true
+    },
+    {
+      "id": 8,
+      "name": "Vicat Apparatus",
+      "category": "Civil QC Lab",
+      "price": 5500,
+      "description": "Manual Vicat apparatus for determining initial and final setting time of cement.",
+      "image": "https://images.unsplash.com/photo-1581092918484-8ae9b4c24e18?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "needleWeight": "300g",
+        "plungerWeight": "300g",
+        "mould": "Conical, hard rubber",
+        "standard": "IS 4031 Part 5"
+      },
+      "inStock": true
+    },
+    {
+      "id": 9,
+      "name": "Slump Test Cone",
+      "category": "Civil QC Lab",
+      "price": 2200,
+      "description": "Standard slump cone for testing workability of fresh concrete as per IS specifications.",
+      "image": "https://images.unsplash.com/photo-1581092918791-1c1b1b1b1b1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "topDiameter": "100mm",
+        "bottomDiameter": "200mm",
+        "height": "300mm",
+        "material": "16 gauge steel"
+      },
+      "inStock": true
+    },
+    {
+      "id": 10,
+      "name": "CBR Test Apparatus",
+      "category": "Civil QC Lab",
+      "price": 45000,
+      "description": "Complete CBR test setup for determining bearing strength of soil subgrade.",
+      "image": "https://images.unsplash.com/photo-1581092919265-1c1b1b1b1b1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "loadCapacity": "50kN",
+        "penetrationRate": "1.25mm/min",
+        "pistonDia": "49.63mm",
+        "mouldDia": "152.4mm"
+      },
+      "inStock": true
+    },
+    {
+      "id": 11,
+      "name": "Concrete Mixer",
+      "category": "Construction",
+      "price": 55000,
+      "description": "Portable concrete mixer with 100L capacity for small to medium construction projects.",
+      "image": "https://images.unsplash.com/photo-1581092919784-1c1b1b1b1b1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "featured": true,
+      "specifications": {
+        "capacity": "100 liters",
+        "power": "1 HP motor",
+        "voltage": "230V single phase",
+        "weight": "85 kg"
+      },
+      "inStock": true
+    },
+    {
+      "id": 12,
+      "name": "Needle Vibrator",
+      "category": "Construction",
+      "price": 12000,
+      "description": "Electric needle vibrator for efficient concrete compaction in construction work.",
+      "image": "https://images.unsplash.com/photo-1581092920296-1c1b1b1b1b1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "power": "1.5 HP motor",
+        "frequency": "12000 VPM",
+        "needleDia": "35mm",
+        "hoseLength": "6 meters"
+      },
+      "inStock": true
+    },
+    {
+      "id": 13,
+      "name": "Plate Compactor",
+      "category": "Construction",
+      "price": 32000,
+      "description": "Heavy-duty plate compactor for soil and asphalt compaction work.",
+      "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "plateSize": "450mm x 350mm",
+        "weight": "85 kg",
+        "engine": "Honda GX160",
+        "compactionForce": "16kN"
+      },
+      "inStock": true
+    },
+    {
+      "id": 14,
+      "name": "Cut-off Machine",
+      "category": "Construction",
+      "price": 18500,
+      "description": "Portable concrete cut-off machine for precise cutting of concrete and masonry.",
+      "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "bladeDia": "350mm (14 inch)",
+        "engine": "2-stroke petrol",
+        "cuttingDepth": "125mm",
+        "weight": "9.5 kg"
+      },
+      "inStock": true
+    },
+    {
+      "id": 15,
+      "name": "Rebar Cutter",
+      "category": "Construction",
+      "price": 25000,
+      "description": "Electric rebar cutter for cutting reinforcement bars up to 32mm diameter.",
+      "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "cuttingCapacity": "32mm rebar",
+        "power": "2.2 kW motor",
+        "cuttingSpeed": "3 sec per cut",
+        "weight": "45 kg"
+      },
+      "inStock": true
+    },
+    {
+      "id": 16,
+      "name": "ISI Safety Helmet",
+      "category": "Safety",
+      "price": 650,
+      "description": "ISI marked safety helmet with adjustable headband for construction site protection.",
+      "image": "https://images.unsplash.com/photo-1578662996442-48f60103fc97?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "material": "HDPE shell",
+        "standard": "IS 2925",
+        "colors": "White, Yellow, Red, Blue",
+        "chinStrap": "Included"
+      },
+      "inStock": true
+    },
+    {
+      "id": 17,
+      "name": "Safety Hand Gloves",
+      "category": "Safety",
+      "price": 250,
+      "description": "Cut-resistant safety gloves with excellent grip for construction workers.",
+      "image": "https://images.unsplash.com/photo-1578662996442-48f60103fc98?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "material": "Nitrile coated",
+        "cutLevel": "Level 5",
+        "sizes": "S, M, L, XL",
+        "grip": "Palm and finger coating"
+      },
+      "inStock": true
+    },
+    {
+      "id": 18,
+      "name": "Safety Harness",
+      "category": "Safety",
+      "price": 3500,
+      "description": "Full body safety harness for working at height protection.",
+      "image": "https://images.unsplash.com/photo-1578662996442-48f60103fc99?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "type": "Full body harness",
+        "material": "Polyester webbing",
+        "buckles": "Auto-locking",
+        "capacity": "140 kg"
+      },
+      "inStock": true
+    },
+    {
+      "id": 19,
+      "name": "Safety Goggles",
+      "category": "Safety",
+      "price": 450,
+      "description": "Anti-fog safety goggles with UV protection for eye safety.",
+      "image": "https://images.unsplash.com/photo-1578662996442-48f60103fc9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "lens": "Polycarbonate",
+        "coating": "Anti-fog, anti-scratch",
+        "uvProtection": "99.9%",
+        "frame": "Flexible TPR"
+      },
+      "inStock": true
+    },
+    {
+      "id": 20,
+      "name": "Safety Shoes",
+      "category": "Safety",
+      "price": 2200,
+      "description": "Steel toe safety shoes with slip-resistant sole for workplace protection.",
+      "image": "https://images.unsplash.com/photo-1578662996442-48f60103fc9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "toeCap": "Steel toe",
+        "sole": "PU dual density",
+        "upper": "Buffalo leather",
+        "sizes": "6-11 UK"
+      },
+      "inStock": true
+    },
+    {
+      "id": 21,
+      "name": "Cordless Drill Set",
+      "category": "Power Tools",
+      "price": 5500,
+      "description": "Professional cordless drill with 18V battery and complete accessory set.",
+      "image": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "featured": true,
+      "specifications": {
+        "voltage": "18V Li-ion",
+        "chuckSize": "13mm keyless",
+        "torque": "50 Nm",
+        "batteryLife": "2-3 hours"
+      },
+      "inStock": true
+    },
+    {
+      "id": 22,
+      "name": "Angle Grinder",
+      "category": "Power Tools",
+      "price": 3200,
+      "description": "4-inch angle grinder with variable speed control for cutting and grinding applications.",
+      "image": "https://images.unsplash.com/photo-1572981779307-38b8cabb2408?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "discSize": "100mm (4 inch)",
+        "power": "850W",
+        "noLoadSpeed": "11000 RPM",
+        "weight": "1.8 kg"
+      },
+      "inStock": true
+    },
+    {
+      "id": 23,
+      "name": "Impact Driver",
+      "category": "Power Tools",
+      "price": 4200,
+      "description": "High-torque impact driver for heavy-duty fastening applications.",
+      "image": "https://images.unsplash.com/photo-1572981779307-38b8cabb2409?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "torque": "180 Nm",
+        "impactsPerMinute": "3600 IPM",
+        "battery": "18V Li-ion",
+        "chuckSize": "1/4 inch hex"
+      },
+      "inStock": true
+    },
+    {
+      "id": 24,
+      "name": "Circular Saw",
+      "category": "Power Tools",
+      "price": 6800,
+      "description": "Professional circular saw with laser guide for precise wood cutting.",
+      "image": "https://images.unsplash.com/photo-1572981779307-38b8cabb240a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "bladeSize": "190mm (7.5 inch)",
+        "power": "1400W",
+        "cuttingDepth": "68mm at 90°",
+        "laserGuide": "Included"
+      },
+      "inStock": true
+    },
+    {
+      "id": 25,
+      "name": "Oscillating Multi-Tool",
+      "category": "Power Tools",
+      "price": 3800,
+      "description": "Versatile oscillating tool with multiple attachments for cutting, sanding, and scraping.",
+      "image": "https://images.unsplash.com/photo-1572981779307-38b8cabb240b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "oscillations": "22000 OPM",
+        "power": "300W",
+        "attachments": "35 piece kit",
+        "toolFree": "Quick change system"
+      },
+      "inStock": true
+    }
+  ],
+  "categories": [
+    {
+      "name": "Survey",
+      "displayName": "Survey Equipment",
+      "description": "Professional surveying instruments for precise measurements",
+      "icon": "fas fa-compass"
+    },
+    {
+      "name": "Civil QC Lab",
+      "displayName": "Civil QC Lab",
+      "description": "Quality control laboratory equipment for construction materials testing",
+      "icon": "fas fa-flask"
+    },
+    {
+      "name": "Construction",
+      "displayName": "Construction",
+      "description": "Heavy-duty construction equipment and machinery",
+      "icon": "fas fa-hard-hat"
+    },
+    {
+      "name": "Safety",
+      "displayName": "Safety Equipment",
+      "description": "Comprehensive safety gear for workplace protection",
+      "icon": "fas fa-shield-alt"
+    },
+    {
+      "name": "Power Tools",
+      "displayName": "Power Tools",
+      "description": "Professional power tools for various applications",
+      "icon": "fas fa-tools"
+    }
+  ]
+}

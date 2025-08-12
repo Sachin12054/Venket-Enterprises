@@ -6,12 +6,14 @@ class VenkatEnterprisesApp {
         this.productsPerPage = 12;
         this.currentPage = 1;
         this.isLoading = false;
+        this.darkMode = localStorage.getItem('darkMode') === 'true';
         
         this.init();
     }
 
-    init() {
-        this.initProducts();
+    async init() {
+        await this.loadProducts();
+        this.initTheme();
         this.initEventListeners();
         this.initAnimations();
         this.hidePreloader();
@@ -28,10 +30,98 @@ class VenkatEnterprisesApp {
         }, 1500);
     }
 
-    // ===== PRODUCTS DATA =====
-    initProducts() {
-        this.products = [
-            // Survey Equipment
+    // ===== THEME MANAGEMENT =====
+    initTheme() {
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Apply saved theme
+        if (this.darkMode) {
+            body.classList.add('dark-theme');
+            this.updateThemeIcon(true);
+        }
+
+        // Theme toggle event listener
+        themeToggle?.addEventListener('click', () => {
+            this.toggleTheme();
+        });
+    }
+
+    toggleTheme() {
+        const body = document.body;
+        this.darkMode = !this.darkMode;
+        
+        if (this.darkMode) {
+            body.classList.add('dark-theme');
+        } else {
+            body.classList.remove('dark-theme');
+        }
+        
+        localStorage.setItem('darkMode', this.darkMode);
+        this.updateThemeIcon(this.darkMode);
+        
+        // Add smooth transition effect
+        body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+        setTimeout(() => {
+            body.style.transition = '';
+        }, 300);
+    }
+
+    updateThemeIcon(isDark) {
+        const themeIcon = document.querySelector('#themeToggle i');
+        if (themeIcon) {
+            themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        }
+    }
+
+    // ===== PRODUCTS DATA LOADING =====
+    async loadProducts() {
+        try {
+            this.showLoadingState();
+            
+            // Try to load from data.json
+            const response = await fetch('data.json');
+            if (!response.ok) {
+                throw new Error('Failed to load products data');
+            }
+            
+            const data = await response.json();
+            this.products = data.products || [];
+            this.categories = data.categories || [];
+            
+        } catch (error) {
+            console.warn('Could not load data.json, using fallback data:', error);
+            // Fallback to embedded data if data.json is not available
+            this.products = this.getFallbackProducts();
+            this.categories = this.getFallbackCategories();
+        } finally {
+            this.hideLoadingState();
+            this.filteredProducts = [...this.products];
+            this.renderProducts();
+        }
+    }
+
+    showLoadingState() {
+        const productsGrid = document.getElementById('productsGrid');
+        if (productsGrid) {
+            productsGrid.innerHTML = `
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading products...</p>
+                </div>
+            `;
+        }
+    }
+
+    hideLoadingState() {
+        const loadingState = document.querySelector('.loading-state');
+        if (loadingState) {
+            loadingState.remove();
+        }
+    }
+
+    getFallbackProducts() {
+        return [
             {
                 id: 1,
                 name: 'Digital Auto Level',
@@ -39,7 +129,8 @@ class VenkatEnterprisesApp {
                 price: 18500,
                 description: 'High precision digital auto level with automatic horizontal circle reading for accurate surveying.',
                 image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-                featured: true
+                featured: true,
+                inStock: true
             },
             {
                 id: 2,
@@ -48,33 +139,9 @@ class VenkatEnterprisesApp {
                 price: 525000,
                 description: 'Advanced electronic total station with EDM for precise angle and distance measurements.',
                 image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-                featured: true
+                featured: true,
+                inStock: true
             },
-            {
-                id: 3,
-                name: 'Digital Theodolite',
-                category: 'Survey',
-                price: 22000,
-                description: 'Professional digital theodolite with LCD display for accurate horizontal and vertical angle measurements.',
-                image: 'https://images.unsplash.com/photo-1581092162384-8987c1d64718?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-            },
-            {
-                id: 4,
-                name: 'Handheld GPS',
-                category: 'Survey',
-                price: 35000,
-                description: 'Rugged handheld GPS unit with high-sensitivity receiver for field surveying applications.',
-                image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-            },
-            {
-                id: 5,
-                name: 'Laser Distance Meter',
-                category: 'Survey',
-                price: 8500,
-                description: 'Compact laser distance meter for quick and accurate distance measurements up to 100m.',
-                image: 'https://images.unsplash.com/photo-1581092335878-4b1d70b6b1b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-            },
-            // Civil QC Lab Equipment
             {
                 id: 6,
                 name: 'Compression Testing Machine',
@@ -82,41 +149,9 @@ class VenkatEnterprisesApp {
                 price: 125000,
                 description: 'Digital compression testing machine for concrete cube and cylinder strength testing.',
                 image: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-                featured: true
+                featured: true,
+                inStock: true
             },
-            {
-                id: 7,
-                name: 'Electric Sieve Shaker',
-                category: 'Civil QC Lab',
-                price: 28000,
-                description: 'Automatic electric sieve shaker for particle size analysis of aggregates and soil.',
-                image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-            },
-            {
-                id: 8,
-                name: 'Vicat Apparatus',
-                category: 'Civil QC Lab',
-                price: 5500,
-                description: 'Manual Vicat apparatus for determining initial and final setting time of cement.',
-                image: 'https://images.unsplash.com/photo-1581092918484-8ae9b4c24e18?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-            },
-            {
-                id: 9,
-                name: 'Slump Test Cone',
-                category: 'Civil QC Lab',
-                price: 2200,
-                description: 'Standard slump cone for testing workability of fresh concrete as per IS specifications.',
-                image: 'https://images.unsplash.com/photo-1581092918791-1c1b1b1b1b1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-            },
-            {
-                id: 10,
-                name: 'CBR Test Apparatus',
-                category: 'Civil QC Lab',
-                price: 45000,
-                description: 'Complete CBR test setup for determining bearing strength of soil subgrade.',
-                image: 'https://images.unsplash.com/photo-1581092919265-1c1b1b1b1b1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-            },
-            // Construction Equipment
             {
                 id: 11,
                 name: 'Concrete Mixer',
@@ -124,34 +159,18 @@ class VenkatEnterprisesApp {
                 price: 55000,
                 description: 'Portable concrete mixer with 100L capacity for small to medium construction projects.',
                 image: 'https://images.unsplash.com/photo-1581092919784-1c1b1b1b1b1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-                featured: true
+                featured: true,
+                inStock: true
             },
-            {
-                id: 12,
-                name: 'Needle Vibrator',
-                category: 'Construction',
-                price: 12000,
-                description: 'Electric needle vibrator for efficient concrete compaction in construction work.',
-                image: 'https://images.unsplash.com/photo-1581092920296-1c1b1b1b1b1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-            },
-            // Safety Equipment
             {
                 id: 16,
                 name: 'ISI Safety Helmet',
                 category: 'Safety',
                 price: 650,
                 description: 'ISI marked safety helmet with adjustable headband for construction site protection.',
-                image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc97?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+                image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc97?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                inStock: true
             },
-            {
-                id: 17,
-                name: 'Safety Hand Gloves',
-                category: 'Safety',
-                price: 250,
-                description: 'Cut-resistant safety gloves with excellent grip for construction workers.',
-                image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc98?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-            },
-            // Power Tools
             {
                 id: 21,
                 name: 'Cordless Drill Set',
@@ -159,26 +178,29 @@ class VenkatEnterprisesApp {
                 price: 5500,
                 description: 'Professional cordless drill with 18V battery and complete accessory set.',
                 image: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-                featured: true
-            },
-            {
-                id: 22,
-                name: 'Angle Grinder',
-                category: 'Power Tools',
-                price: 3200,
-                description: '4-inch angle grinder with variable speed control for cutting and grinding applications.',
-                image: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2408?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+                featured: true,
+                inStock: true
             }
         ];
+    }
 
-        this.filteredProducts = [...this.products];
-        this.renderProducts();
+    getFallbackCategories() {
+        return [
+            { name: 'Survey', displayName: 'Survey Equipment', icon: 'fas fa-compass' },
+            { name: 'Civil QC Lab', displayName: 'Civil QC Lab', icon: 'fas fa-flask' },
+            { name: 'Construction', displayName: 'Construction', icon: 'fas fa-hard-hat' },
+            { name: 'Safety', displayName: 'Safety Equipment', icon: 'fas fa-shield-alt' },
+            { name: 'Power Tools', displayName: 'Power Tools', icon: 'fas fa-tools' }
+        ];
     }
 
     // ===== EVENT LISTENERS =====
     initEventListeners() {
         // Navigation
         this.initNavigation();
+        
+        // Mobile menu toggle
+        this.initMobileMenu();
         
         // Back to top button
         this.initBackToTop();
@@ -191,6 +213,41 @@ class VenkatEnterprisesApp {
         
         // Smooth scrolling
         this.initSmoothScrolling();
+        
+        // Hero scroll indicator
+        this.initHeroScroll();
+
+        // Window resize handler
+        window.addEventListener('resize', this.debounce(() => {
+            this.handleResize();
+        }, 250));
+    }
+
+    // ===== MOBILE MENU =====
+    initMobileMenu() {
+        const menuToggle = document.getElementById('menuToggle');
+        const navList = document.querySelector('.nav-list');
+        
+        menuToggle?.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navList.contains(e.target)) {
+                navList.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking on nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
     }
 
     // ===== NAVIGATION =====
@@ -207,12 +264,13 @@ class VenkatEnterprisesApp {
                     navLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
                     
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const headerHeight = document.querySelector('.header').offsetHeight;
+                    const targetPosition = targetSection.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
                     });
-                } else if (targetId === 'aboutus.html' || targetId === 'contact.html') {
-                    window.location.href = targetId;
                 }
             });
         });
@@ -236,6 +294,23 @@ class VenkatEnterprisesApp {
                     if (link.getAttribute('href') === `#${sectionId}`) {
                         link.classList.add('active');
                     }
+                });
+            }
+        });
+    }
+
+    // ===== HERO SCROLL INDICATOR =====
+    initHeroScroll() {
+        const heroScroll = document.getElementById('heroScroll');
+        heroScroll?.addEventListener('click', () => {
+            const aboutSection = document.getElementById('solutions');
+            if (aboutSection) {
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = aboutSection.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
                 });
             }
         });
@@ -322,8 +397,16 @@ class VenkatEnterprisesApp {
     }
 
     loadMoreProducts() {
-        this.currentPage++;
-        this.renderProducts(false);
+        const loadMoreBtn = document.getElementById('loadMore');
+        loadMoreBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+        loadMoreBtn.disabled = true;
+
+        setTimeout(() => {
+            this.currentPage++;
+            this.renderProducts(false);
+            loadMoreBtn.innerHTML = 'Load More Products';
+            loadMoreBtn.disabled = false;
+        }, 800);
     }
 
     renderProducts(clearContainer = true) {
@@ -346,6 +429,10 @@ class VenkatEnterprisesApp {
                     <i class="fas fa-search"></i>
                     <h3>No products found</h3>
                     <p>Try adjusting your search or filter criteria.</p>
+                    <button class="btn btn-primary" onclick="venkatApp.resetFilters()">
+                        <i class="fas fa-refresh"></i>
+                        Reset Filters
+                    </button>
                 </div>
             `;
             loadMoreBtn?.style.setProperty('display', 'none');
@@ -365,21 +452,155 @@ class VenkatEnterprisesApp {
         }
 
         this.triggerProductAnimations();
+        this.updateProductCount();
     }
 
     createProductCard(product) {
         const card = document.createElement('div');
         card.className = 'product-card fade-in';
+        
+        const stockStatus = product.inStock ? 
+            '<span class="stock-status in-stock"><i class="fas fa-check"></i> In Stock</span>' : 
+            '<span class="stock-status out-of-stock"><i class="fas fa-times"></i> Out of Stock</span>';
+        
+        const featuredBadge = product.featured ? 
+            '<span class="product-badge"><i class="fas fa-star"></i> Featured</span>' : '';
+
         card.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" loading="lazy">
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/500x250?text=Image+Not+Found'">
+                <div class="product-overlay">
+                    <button class="btn btn-primary" onclick="venkatApp.viewProduct(${product.id})">
+                        <i class="fas fa-eye"></i>
+                        View Details
+                    </button>
+                </div>
+                ${featuredBadge}
+            </div>
             <div class="product-info">
+                <div class="product-category">${product.category}</div>
                 <h4>${product.name}</h4>
                 <div class="product-price">₹${product.price.toLocaleString()}</div>
                 <p>${product.description}</p>
-                ${product.featured ? '<span class="product-badge">Featured</span>' : ''}
+                ${stockStatus}
             </div>
         `;
         return card;
+    }
+
+    viewProduct(productId) {
+        const product = this.products.find(p => p.id === productId);
+        if (product) {
+            this.showProductModal(product);
+        }
+    }
+
+    showProductModal(product) {
+        // Create modal HTML
+        const modalHTML = `
+            <div class="product-modal-overlay" id="productModal">
+                <div class="product-modal">
+                    <div class="modal-header">
+                        <h3>${product.name}</h3>
+                        <button class="modal-close" onclick="venkatApp.closeProductModal()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-content">
+                        <div class="modal-image">
+                            <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/500x300?text=Image+Not+Found'">
+                            ${product.featured ? '<span class="modal-badge"><i class="fas fa-star"></i> Featured</span>' : ''}
+                        </div>
+                        <div class="modal-details">
+                            <div class="product-category">${product.category}</div>
+                            <div class="product-price">₹${product.price.toLocaleString()}</div>
+                            <p class="product-description">${product.description}</p>
+                            ${product.specifications ? this.renderSpecifications(product.specifications) : ''}
+                            <div class="modal-actions">
+                                <button class="btn btn-primary" onclick="venkatApp.contactForQuote('${product.name}')">
+                                    <i class="fas fa-phone"></i>
+                                    Get Quote
+                                </button>
+                                <button class="btn btn-outline" onclick="venkatApp.addToWishlist(${product.id})">
+                                    <i class="fas fa-heart"></i>
+                                    Add to Wishlist
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Add modal to DOM
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+        
+        // Close modal on overlay click
+        document.getElementById('productModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('product-modal-overlay')) {
+                this.closeProductModal();
+            }
+        });
+    }
+
+    renderSpecifications(specs) {
+        let specsHTML = '<div class="product-specifications"><h4>Specifications</h4><ul>';
+        for (const [key, value] of Object.entries(specs)) {
+            const formattedKey = key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1');
+            specsHTML += `<li><strong>${formattedKey}:</strong> ${value}</li>`;
+        }
+        specsHTML += '</ul></div>';
+        return specsHTML;
+    }
+
+    closeProductModal() {
+        const modal = document.getElementById('productModal');
+        if (modal) {
+            modal.remove();
+            document.body.style.overflow = '';
+        }
+    }
+
+    contactForQuote(productName) {
+        // In a real application, this would open a contact form or redirect to WhatsApp/email
+        const message = `Hi, I'm interested in getting a quote for ${productName}. Please provide more details.`;
+        const whatsappUrl = `https://wa.me/919876543210?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+    }
+
+    addToWishlist(productId) {
+        let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+        if (!wishlist.includes(productId)) {
+            wishlist.push(productId);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            this.showNotification('Product added to wishlist!', 'success');
+        } else {
+            this.showNotification('Product already in wishlist!', 'info');
+        }
+    }
+
+    resetFilters() {
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        
+        if (searchInput) searchInput.value = '';
+        
+        filterBtns.forEach(btn => btn.classList.remove('active'));
+        filterBtns[0]?.classList.add('active'); // Activate "All Products"
+        
+        this.filteredProducts = [...this.products];
+        this.currentPage = 1;
+        this.renderProducts();
+    }
+
+    updateProductCount() {
+        const countElement = document.getElementById('productCount');
+        if (countElement) {
+            countElement.textContent = `Showing ${Math.min(this.currentPage * this.productsPerPage, this.filteredProducts.length)} of ${this.filteredProducts.length} products`;
+        }
     }
 
     triggerProductAnimations() {
@@ -413,71 +634,472 @@ class VenkatEnterprisesApp {
         });
     }
 
+    // ===== NOTIFICATIONS =====
+    showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+            <span>${message}</span>
+            <button onclick="this.parentElement.remove()" class="notification-close">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+
+        document.body.appendChild(notification);
+
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.remove();
+            }
+        }, 5000);
+    }
+
+    // ===== RESPONSIVE HANDLER =====
+    handleResize() {
+        // Recalculate any responsive elements if needed
+        this.updateActiveNav();
+    }
+
     // ===== ANIMATIONS =====
     initAnimations() {
+        // Add intersection observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements that should animate on scroll
+        document.querySelectorAll('.solution-card, .service-card, .testimonial-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add CSS for animations and theme
+        this.injectStyles();
+    }
+
+    injectStyles() {
         const style = document.createElement('style');
         style.textContent = `
-            .no-products {
-                grid-column: 1 / -1;
-                text-align: center;
-                padding: 60px 20px;
-                color: var(--text-medium);
+            /* Dark Theme Styles */
+            .dark-theme {
+                --text-dark: #f8f9fa;
+                --text-medium: #adb5bd;
+                --text-light: #6c757d;
+                --bg-white: #212529;
+                --bg-light: #343a40;
+                --bg-dark: #1a1d23;
             }
-            
-            .no-products i {
-                font-size: 4rem;
-                margin-bottom: 20px;
-                opacity: 0.5;
+
+            .dark-theme .header {
+                background: rgba(33, 37, 41, 0.95);
+                border-bottom-color: rgba(255, 255, 255, 0.1);
             }
-            
-            .no-products h3 {
-                margin-bottom: 10px;
+
+            .dark-theme .header.scrolled {
+                background: rgba(33, 37, 41, 0.98);
+            }
+
+            .dark-theme .search-box input {
+                background: var(--bg-light);
+                border-color: var(--text-light);
                 color: var(--text-dark);
             }
-            
-            .product-badge {
+
+            .dark-theme .filter-btn {
+                background: var(--bg-light);
+                border-color: var(--text-light);
+                color: var(--text-medium);
+            }
+
+            /* Theme Toggle Button */
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: none;
+                background: var(--bg-light);
+                color: var(--text-dark);
+                cursor: pointer;
+                transition: var(--transition);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .theme-toggle:hover {
+                background: var(--primary-color);
+                color: var(--text-white);
+                transform: scale(1.1);
+            }
+
+            /* Mobile Menu Styles */
+            .menu-toggle span {
+                transition: var(--transition);
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            /* Product Modal Styles */
+            .product-modal-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                opacity: 0;
+                animation: fadeIn 0.3s ease-out forwards;
+            }
+
+            .product-modal {
+                background: var(--bg-white);
+                border-radius: var(--border-radius-large);
+                max-width: 800px;
+                width: 90%;
+                max-height: 90vh;
+                overflow-y: auto;
+                box-shadow: var(--shadow-heavy);
+                transform: scale(0.9);
+                animation: modalSlideIn 0.3s ease-out 0.1s forwards;
+            }
+
+            @keyframes modalSlideIn {
+                to {
+                    transform: scale(1);
+                }
+            }
+
+            .modal-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px 30px;
+                border-bottom: 1px solid #eee;
+            }
+
+            .modal-header h3 {
+                margin: 0;
+                color: var(--text-dark);
+            }
+
+            .modal-close {
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--text-medium);
+                cursor: pointer;
+                transition: var(--transition);
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .modal-close:hover {
+                background: var(--bg-light);
+                color: var(--text-dark);
+            }
+
+            .modal-content {
+                padding: 30px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+
+            .modal-image {
+                position: relative;
+            }
+
+            .modal-image img {
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+                border-radius: var(--border-radius);
+            }
+
+            .modal-badge {
                 position: absolute;
                 top: 15px;
                 right: 15px;
                 background: var(--primary-color);
                 color: white;
-                padding: 5px 10px;
-border-radius: 15px;
-font-size: 0.8rem;
-font-weight: 500;
+                padding: 8px 12px;
+                border-radius: 20px;
+                font-size: 0.85rem;
+                font-weight: 500;
+            }
+
+            .modal-details .product-category {
+                font-size: 0.9rem;
+                color: var(--primary-color);
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 10px;
+            }
+
+            .modal-details .product-price {
+                font-size: 2rem;
+                font-weight: 700;
+                color: var(--primary-color);
+                margin-bottom: 20px;
+            }
+
+            .product-description {
+                color: var(--text-medium);
+                line-height: 1.7;
+                margin-bottom: 25px;
+            }
+
+            .product-specifications h4 {
+                color: var(--text-dark);
+                margin-bottom: 15px;
+                font-size: 1.2rem;
+            }
+
+            .product-specifications ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            .product-specifications li {
+                padding: 8px 0;
+                border-bottom: 1px solid #f0f0f0;
+                color: var(--text-medium);
+            }
+
+            .modal-actions {
+                margin-top: 30px;
+                display: flex;
+                gap: 15px;
+            }
+
+            /* Loading State */
+            .loading-state {
+                grid-column: 1 / -1;
+                text-align: center;
+                padding: 80px 20px;
+                color: var(--text-medium);
+            }
+
+            .loading-state .spinner {
+                margin: 0 auto 20px;
+            }
+
+            /* No Products State */
+            .no-products {
+                grid-column: 1 / -1;
+                text-align: center;
+                padding: 80px 20px;
+                color: var(--text-medium);
+            }
+
+            .no-products i {
+                font-size: 4rem;
+                margin-bottom: 20px;
+                opacity: 0.5;
+            }
+
+            .no-products h3 {
+                margin-bottom: 10px;
+                color: var(--text-dark);
+            }
+
+            /* Stock Status */
+            .stock-status {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                padding: 4px 8px;
+                border-radius: 15px;
+                font-size: 0.8rem;
+                font-weight: 500;
+                margin-top: 10px;
+            }
+
+            .stock-status.in-stock {
+                background: rgba(39, 174, 96, 0.1);
+                color: var(--success-color);
+            }
+
+            .stock-status.out-of-stock {
+                background: rgba(231, 76, 60, 0.1);
+                color: var(--error-color);
+            }
+
+            /* Notifications */
+            .notification {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--bg-white);
+                color: var(--text-dark);
+                padding: 15px 20px;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow-medium);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                z-index: 10001;
+                max-width: 350px;
+                animation: slideInRight 0.3s ease-out;
+            }
+
+            .notification-success {
+                border-left: 4px solid var(--success-color);
+            }
+
+            .notification-error {
+                border-left: 4px solid var(--error-color);
+            }
+
+            .notification-info {
+                border-left: 4px solid var(--accent-color);
+            }
+
+            .notification-close {
+                background: none;
+                border: none;
+                color: var(--text-medium);
+                cursor: pointer;
+                margin-left: auto;
+            }
+
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+
+            /* Responsive Modal */
+            @media (max-width: 768px) {
+                .modal-content {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
+
+                .modal-actions {
+                    flex-direction: column;
+                }
+
+                .product-modal {
+                    width: 95%;
+                    margin: 20px;
+                }
+
+                .modal-header,
+                .modal-content {
+                    padding: 20px;
+                }
+            }
+
+            /* Animation Classes */
+            .animate-in {
+                animation: slideInUp 0.6s ease-out;
+            }
+
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // ===== UTILITY FUNCTIONS =====
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    }
+
+    // ===== PUBLIC API METHODS =====
+    getProducts() {
+        return this.products;
+    }
+
+    getProductById(id) {
+        return this.products.find(product => product.id === id);
+    }
+
+    searchProducts(query) {
+        return this.products.filter(product =>
+            product.name.toLowerCase().includes(query.toLowerCase()) ||
+            product.description.toLowerCase().includes(query.toLowerCase())
+        );
+    }
 }
-.product-card {
-position: relative;
-}
-`;
-document.head.appendChild(style);
-}
-// ===== UTILITY FUNCTIONS =====
-debounce(func, wait) {
-let timeout;
-return function executedFunction(...args) {
-const later = () => {
-clearTimeout(timeout);
-func(...args);
-};
-clearTimeout(timeout);
-timeout = setTimeout(later, wait);
-};
-}
-throttle(func, limit) {
-let inThrottle;
-return function() {
-const args = arguments;
-const context = this;
-if (!inThrottle) {
-func.apply(context, args);
-inThrottle = true;
-setTimeout(() => inThrottle = false, limit);
-}
-};
-}
-}// ===== INITIALIZATION =====
+
+// ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
-const app = new VenkatEnterprisesApp();
-window.venkatApp = app;
+    const app = new VenkatEnterprisesApp();
+    window.venkatApp = app;
+
+    // Add global error handler
+    window.addEventListener('error', (e) => {
+        console.error('Application error:', e.error);
+    });
+
+    // Add performance monitoring
+    window.addEventListener('load', () => {
+        const loadTime = performance.now();
+        console.log(`Page loaded in ${Math.round(loadTime)}ms`);
+    });
 });

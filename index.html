@@ -3,128 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venkat Enterprises - Complete Civil Engineering Solutions</title>
-    <meta name="description" content="Leading supplier of civil engineering products with 15+ years experience. Survey equipment, lab instruments, construction tools, and safety gear.">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>Venkat Enterprises - Professional Engineering Solutions</title>
+    <meta name="description" content="Leading provider of survey equipment, civil QC lab equipment, construction tools, and safety equipment for engineering professionals.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
 </head>
 <body>
-    <!-- Preloader -->
+    <!-- ===== PRELOADER ===== -->
     <div id="preloader">
         <div class="loader">
             <div class="spinner"></div>
-            <p>Loading...</p>
+            <p>Loading Venkat Enterprises...</p>
         </div>
     </div>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="back-to-top">
+    <!-- ===== BACK TO TOP BUTTON ===== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Header -->
+    <!-- ===== HEADER ===== -->
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <div class="logo">
+                <a href="#home" class="logo">
                     <div class="logo-icon">
-                        <i class="fas fa-tools"></i>
+                        <i class="fas fa-cogs"></i>
                     </div>
                     <div class="logo-text">
                         <h1>Venkat Enterprises</h1>
-                        <span>Complete Civil Engineering Solutions</span>
+                        <span>Engineering Solutions</span>
                     </div>
-                </div>
-                
+                </a>
+
                 <nav class="nav">
                     <ul class="nav-list">
                         <li><a href="#home" class="nav-link active">Home</a></li>
-                        <li><a href="aboutus.html" class="nav-link">About</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
                         <li><a href="#products" class="nav-link">Products</a></li>
-                        <li><a href="contact.html" class="nav-link">Contact</a></li>
+                        <li><a href="#services" class="nav-link">Services</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                        <li class="nav-cta">
+                            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </li>
+                        <li class="nav-cta">
+                            <a href="#contact" class="btn btn-primary">Get Quote</a>
+                        </li>
                     </ul>
+
+                    <!-- Mobile Menu Toggle -->
+                    <div class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </nav>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <span class="hero-badge">15+ Years Experience</span>
-                <h1>Precision Civil Engineering Solutions</h1>
-                <p>Empowering projects with top-tier survey instruments, lab equipment, construction tools, and safety gear since 2010.</p>
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">Professional Engineering Equipment</div>
+                <div class="hero-text">
+                    <h1>Premium Quality Equipment for Engineering Excellence</h1>
+                    <p>Your trusted partner for survey instruments, civil lab equipment, construction tools, and safety gear. Delivering precision and reliability for over two decades.</p>
+                </div>
                 <div class="hero-buttons">
-                    <a href="#products" class="btn btn-primary">Explore Solutions</a>
-                    <a href="contact.html" class="btn btn-secondary">Request a Quote</a>
+                    <a href="#products" class="btn btn-primary">
+                        <i class="fas fa-shopping-cart"></i>
+                        Browse Products
+                    </a>
+                    <a href="#services" class="btn btn-secondary">
+                        <i class="fas fa-info-circle"></i>
+                        Learn More
+                    </a>
                 </div>
             </div>
         </div>
+        <div class="hero-scroll" id="heroScroll">
+            <i class="fas fa-chevron-down"></i>
+        </div>
     </section>
 
-    <!-- Featured Solutions Section -->
-    <section id="featured-solutions" class="featured-solutions">
+    <!-- ===== FEATURED SOLUTIONS SECTION ===== -->
+    <section class="featured-solutions" id="solutions">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">Our Expertise</span>
-                <h2>Featured Civil Engineering Solutions</h2>
-                <p>Discover our specialized offerings tailored to meet the demands of modern construction projects.</p>
+                <div class="section-badge">Our Expertise</div>
+                <h2>Featured Solutions</h2>
+                <p>Comprehensive range of professional equipment designed to meet the highest industry standards and deliver exceptional performance.</p>
             </div>
-            
-            <div class="solutions-grid" id="solutionsGrid">
+
+            <div class="solutions-grid">
                 <div class="solution-card">
-                    <div class="solution-icon"><i class="fas fa-compass"></i></div>
-                    <h3>Surveying Precision</h3>
-                    <p>Advanced tools like Total Stations and Digital Levels for accurate land measurement and mapping.</p>
+                    <div class="solution-icon">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <h3>Survey Equipment</h3>
+                    <p>Professional surveying instruments including total stations, theodolites, auto levels, and GPS units for precise measurements.</p>
+                    <a href="#products" class="solution-link">
+                        Explore Survey Tools <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
+
                 <div class="solution-card">
-                    <div class="solution-icon"><i class="fas fa-flask"></i></div>
-                    <h3>Lab Testing Excellence</h3>
-                    <p>State-of-the-art equipment for concrete, soil, and material testing to ensure quality standards.</p>
+                    <div class="solution-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Civil QC Lab</h3>
+                    <p>Complete range of civil quality control laboratory equipment for material testing and construction quality assurance.</p>
+                    <a href="#products" class="solution-link">
+                        View Lab Equipment <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
+
                 <div class="solution-card">
-                    <div class="solution-icon"><i class="fas fa-hammer"></i></div>
+                    <div class="solution-icon">
+                        <i class="fas fa-hard-hat"></i>
+                    </div>
                     <h3>Construction Tools</h3>
-                    <p>Reliable machinery and tools designed for efficient and durable construction workflows.</p>
+                    <p>Heavy-duty construction equipment and tools designed for durability and efficiency in demanding work environments.</p>
+                    <a href="#products" class="solution-link">
+                        Browse Tools <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
+
                 <div class="solution-card">
-                    <div class="solution-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Safety Gear</h3>
-                    <p>High-quality protective equipment to ensure worker safety on every site.</p>
+                    <div class="solution-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safety Equipment</h3>
+                    <p>Comprehensive safety gear and protective equipment to ensure worker safety and regulatory compliance.</p>
+                    <a href="#products" class="solution-link">
+                        Safety Products <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section (Minimal) -->
-    <section id="about" class="about">
+    <!-- ===== ABOUT SECTION ===== -->
+    <section class="about" id="about">
         <div class="container">
-            <div class="section-header">
-                <span class="section-badge">About Us</span>
-                <h2>Who We Are</h2>
-                <p>Venkat Enterprises is a trusted leader in civil engineering solutions with over 15 years of experience. Learn more about our journey and values.</p>
-            </div>
-            
             <div class="about-content">
                 <div class="about-text">
-                    <p>With a commitment to quality and innovation, we provide top-tier equipment for survey, lab testing, construction, and safety needs. <a href="aboutus.html" class="read-more">Read more</a></p>
+                    <div class="section-badge">About Us</div>
+                    <h2>Two Decades of Engineering Excellence</h2>
+                    <p>Established in 2003, Venkat Enterprises has been at the forefront of providing high-quality engineering equipment and solutions to professionals across various industries. Our commitment to excellence and customer satisfaction has made us a trusted name in the field.</p>
+                    
+                    <p>We specialize in importing and distributing premium quality survey instruments, civil laboratory equipment, construction tools, and safety gear from leading international manufacturers. Our extensive product range caters to the diverse needs of engineering consultants, contractors, and educational institutions.</p>
+
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">20+</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5000+</span>
+                            <span class="stat-label">Happy Clients</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Products</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Support</span>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                </div>
+
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Engineering Excellence">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section id="products" class="products">
+    <!-- ===== PRODUCTS SECTION ===== -->
+    <section class="products" id="products">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">Our Products</span>
-                <h2>Complete Range of Civil Engineering Equipment</h2>
-                <p>Discover our extensive catalog of professional-grade products</p>
+                <div class="section-badge">Our Products</div>
+                <h2>Premium Engineering Equipment</h2>
+                <p>Discover our comprehensive range of professional-grade equipment designed to meet the demanding requirements of modern engineering projects.</p>
             </div>
-            
+
             <div class="product-filters">
                 <div class="filter-search">
                     <div class="search-box">
@@ -132,100 +213,271 @@
                         <input type="text" id="searchInput" placeholder="Search products...">
                     </div>
                 </div>
-                
+
                 <div class="filter-categories">
                     <button class="filter-btn active" data-filter="all">All Products</button>
                     <button class="filter-btn" data-filter="Survey">Survey Equipment</button>
-                    <button class="filter-btn" data-filter="Civil QC Lab">Lab Instruments</button>
-                    <button class="filter-btn" data-filter="Construction">Construction Tools</button>
-                    <button class="filter-btn" data-filter="Safety">Safety Gear</button>
+                    <button class="filter-btn" data-filter="Civil QC Lab">Civil QC Lab</button>
+                    <button class="filter-btn" data-filter="Construction">Construction</button>
+                    <button class="filter-btn" data-filter="Safety">Safety Equipment</button>
                     <button class="filter-btn" data-filter="Power Tools">Power Tools</button>
                 </div>
             </div>
-            
+
             <div class="products-grid" id="productsGrid">
-                <!-- Products will be dynamically inserted here -->
+                <!-- Products will be loaded dynamically -->
             </div>
-            
+
             <div class="load-more">
-                <button class="btn btn-primary" id="loadMore">Load More Products</button>
+                <button class="btn btn-outline" id="loadMore">Load More Products</button>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- ===== SERVICES SECTION ===== -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Our Services</div>
+                <h2>Comprehensive Engineering Support</h2>
+                <p>Beyond supplying premium equipment, we offer comprehensive services to ensure your projects run smoothly and efficiently.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Equipment Supply</h3>
+                    <p>Direct import and distribution of premium engineering equipment from certified international manufacturers.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Genuine products with warranty</li>
+                        <li><i class="fas fa-check"></i> Competitive pricing</li>
+                        <li><i class="fas fa-check"></i> Fast delivery nationwide</li>
+                        <li><i class="fas fa-check"></i> Bulk order discounts</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Installation & Setup</h3>
+                    <p>Professional installation and calibration services to ensure optimal performance of your equipment.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Expert installation team</li>
+                        <li><i class="fas fa-check"></i> Equipment calibration</li>
+                        <li><i class="fas fa-check"></i> User training included</li>
+                        <li><i class="fas fa-check"></i> Performance testing</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Technical Support</h3>
+                    <p>Comprehensive technical support and maintenance services to keep your equipment running at peak performance.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> 24/7 helpline support</li>
+                        <li><i class="fas fa-check"></i> Remote troubleshooting</li>
+                        <li><i class="fas fa-check"></i> Regular maintenance</li>
+                        <li><i class="fas fa-check"></i> Spare parts supply</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Training Programs</h3>
+                    <p>Comprehensive training programs to help your team maximize the potential of your equipment investment.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Hands-on training sessions</li>
+                        <li><i class="fas fa-check"></i> Equipment operation guides</li>
+                        <li><i class="fas fa-check"></i> Safety protocols training</li>
+                        <li><i class="fas fa-check"></i> Certification programs</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Consultation</h3>
+                    <p>Expert consultation services to help you choose the right equipment for your specific project requirements.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Project requirement analysis</li>
+                        <li><i class="fas fa-check"></i> Equipment recommendation</li>
+                        <li><i class="fas fa-check"></i> Cost-benefit analysis</li>
+                        <li><i class="fas fa-check"></i> Implementation planning</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h3>Maintenance & Repair</h3>
+                    <p>Professional maintenance and repair services to extend the life of your equipment and minimize downtime.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Preventive maintenance</li>
+                        <li><i class="fas fa-check"></i> Emergency repairs</li>
+                        <li><i class="fas fa-check"></i> Genuine spare parts</li>
+                        <li><i class="fas fa-check"></i> AMC packages available</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS SECTION ===== -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Testimonials</div>
+                <h2>What Our Clients Say</h2>
+                <p>Don't just take our word for it. Here's what some of our satisfied clients have to say about our products and services.</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Venkat Enterprises has been our go-to supplier for survey equipment for over 5 years. Their products are reliable, and their service is exceptional. Highly recommended!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RS</div>
+                        <div class="author-info">
+                            <h5>Rajesh Sharma</h5>
+                            <span>Senior Survey Engineer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The quality of civil lab equipment from Venkat Enterprises is outstanding. Their technical support team is knowledgeable and always ready to help."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AP</div>
+                        <div class="author-info">
+                            <h5>Anita Patel</h5>
+                            <span>Lab Manager</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Professional service, competitive pricing, and genuine products. Venkat Enterprises has everything we need for our construction projects."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MK</div>
+                        <div class="author-info">
+                            <h5>Mahesh Kumar</h5>
+                            <span>Project Manager</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Elevate Your Projects?</h2>
+                <p>Contact us today to discuss your equipment requirements and discover how Venkat Enterprises can help you achieve engineering excellence.</p>
+                <a href="#contact" class="btn btn-secondary">
+                    <i class="fas fa-phone"></i>
+                    Get Started Today
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" id="contact">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
                     <div class="logo">
                         <div class="logo-icon">
-                            <i class="fas fa-tools"></i>
+                            <i class="fas fa-cogs"></i>
                         </div>
                         <div class="logo-text">
                             <h3>Venkat Enterprises</h3>
-                            <span>Complete Civil Engineering Solutions</span>
+                            <span>Engineering Solutions</span>
                         </div>
                     </div>
-                    <p>Your trusted partner for high-quality civil engineering equipment with over 15 years of industry experience.</p>
+                    <p>Your trusted partner for premium engineering equipment and solutions. Delivering excellence since 2003.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
-                
+
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="aboutus.html">About Us</a></li>
+                        <li><a href="#about">About Us</a></li>
                         <li><a href="#products">Products</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-links">
-                    <h4>Product Categories</h4>
+                    <h4>Products</h4>
                     <ul>
                         <li><a href="#products">Survey Equipment</a></li>
-                        <li><a href="#products">Lab Instruments</a></li>
+                        <li><a href="#products">Civil QC Lab</a></li>
                         <li><a href="#products">Construction Tools</a></li>
-                        <li><a href="#products">Safety Gear</a></li>
+                        <li><a href="#products">Safety Equipment</a></li>
                         <li><a href="#products">Power Tools</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-contact">
                     <h4>Contact Info</h4>
                     <div class="footer-contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>188-B, Bhasyakaralu Road East, R.S. Puram, Coimbatore - 641002</span>
+                        <span>123 Engineering Hub<br>Industrial Area, City 560001</span>
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-phone"></i>
-                        <span>+91 80560 88444</span>
+                        <span>+91 98765 43210<br>+91 87654 32109</span>
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>venkatetp@gmail.com</span>
+                        <span>info@venkatenterprises.com<br>sales@venkatenterprises.com</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Mon - Sat: 9:00 AM - 6:00 PM<br>Sunday: Closed</span>
                     </div>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <div class="footer-copyright">
-                    <p>&copy; 2025 Venkat Enterprises. All rights reserved.</p>
+                    <p>&copy; 2024 Venkat Enterprises. All rights reserved.</p>
                 </div>
                 <div class="footer-legal">
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms of Service</a>
+                    <a href="#">Warranty</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
 </body>
 </html>
