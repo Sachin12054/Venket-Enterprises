@@ -1,0 +1,139 @@
+[
+  {
+    "id": 1,
+    "name": "LED Tube Light",
+    "description": "Energy-efficient LED tube light with high brightness and long lifespan.",
+    "price": "450",
+    "category": "Lighting Solutions",
+    "tags": ["LED", "energy-saving", "lighting"],
+    "image": "https://example.com/images/led-tube-light.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Smart Ceiling Light",
+    "description": "Wi-Fi-enabled smart ceiling light with adjustable brightness and color.",
+    "price": "2500",
+    "category": "Lighting Solutions",
+    "tags": ["smart", "ceiling", "LED"],
+    "image": "https://example.com/images/smart-ceiling-light.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Industrial Flood Light",
+    "description": "Heavy-duty LED flood light for industrial and outdoor use.",
+    "price": "3500",
+    "category": "Lighting Solutions",
+    "tags": ["industrial", "flood", "outdoor"],
+    "image": "https://example.com/images/industrial-flood-light.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Rechargeable Emergency Light",
+    "description": "Portable rechargeable emergency light with long battery backup.",
+    "price": "1200",
+    "category": "Lighting Solutions",
+    "tags": ["emergency", "rechargeable", "LED"],
+    "image": "https://example.com/images/emergency-light.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Decorative Wall Lamp",
+    "description": "Modern wall-mounted decorative lamp for homes and offices.",
+    "price": "1800",
+    "category": "Lighting Solutions",
+    "tags": ["decorative", "wall", "LED"],
+    "image": "https://example.com/images/wall-lamp.jpg"
+  },
+
+  {
+    "id": 6,
+    "name": "Copper Electrical Wires",
+    "description": "High-quality copper electrical wires for residential and commercial use.",
+    "price": "50/meter",
+    "category": "Wiring & Cables",
+    "tags": ["copper", "wiring", "cables"],
+    "image": "https://example.com/images/copper-wire.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Fiber Optic Cable",
+    "description": "High-speed fiber optic cable for data and networking.",
+    "price": "200/meter",
+    "category": "Wiring & Cables",
+    "tags": ["fiber", "network", "data"],
+    "image": "https://example.com/images/fiber-optic-cable.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Armoured Power Cable",
+    "description": "Heavy-duty armoured cable for industrial power supply.",
+    "price": "350/meter",
+    "category": "Wiring & Cables",
+    "tags": ["armoured", "power", "cables"],
+    "image": "https://example.com/images/armoured-cable.jpg"
+  },
+  {
+    "id": 9,
+    "name": "PVC Insulated Wire",
+    "description": "Flexible PVC insulated wire for general electrical use.",
+    "price": "30/meter",
+    "category": "Wiring & Cables",
+    "tags": ["PVC", "insulated", "wiring"],
+    "image": "https://example.com/images/pvc-wire.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Solar Cable",
+    "description": "Weather-resistant cable designed for solar power systems.",
+    "price": "120/meter",
+    "category": "Wiring & Cables",
+    "tags": ["solar", "renewable", "cables"],
+    "image": "https://example.com/images/solar-cable.jpg"
+  },
+
+  {
+    "id": 11,
+    "name": "MCB Circuit Breaker",
+    "description": "Miniature circuit breaker for home electrical safety.",
+    "price": "350",
+    "category": "Electrical Safety",
+    "tags": ["MCB", "breaker", "safety"],
+    "image": "https://example.com/images/mcb-breaker.jpg"
+  },
+  {
+    "id": 12,
+    "name": "RCCB Residual Current Breaker",
+    "description": "Protects against electric shocks and leakage currents.",
+    "price": "1450",
+    "category": "Electrical Safety",
+    "tags": ["RCCB", "breaker", "shock-protection"],
+    "image": "https://example.com/images/rccb-breaker.jpg"
+  },
+  {
+    "id": 13,
+    "name": "Surge Protector",
+    "description": "Prevents damage from sudden voltage spikes.",
+    "price": "900",
+    "category": "Electrical Safety",
+    "tags": ["surge", "protector", "safety"],
+    "image": "https://example.com/images/surge-protector.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Industrial Fuse",
+    "description": "High-capacity fuse for industrial machinery protection.",
+    "price": "250",
+    "category": "Electrical Safety",
+    "tags": ["fuse", "industrial", "protection"],
+    "image": "https://example.com/images/industrial-fuse.jpg"
+  },
+  {
+    "id": 15,
+    "name": "Earthing Kit",
+    "description": "Complete earthing solution for residential and industrial buildings.",
+    "price": "3200",
+    "category": "Electrical Safety",
+    "tags": ["earthing", "safety", "grounding"],
+    "image": "https://example.com/images/earthing-kit.jpg"
+  }
+]
