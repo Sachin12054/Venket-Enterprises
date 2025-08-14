@@ -128,7 +128,7 @@ class VenkatEnterprisesApp {
                 category: 'Survey',
                 price: 18500,
                 description: 'High precision digital auto level with automatic horizontal circle reading for accurate surveying.',
-                image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                image: 'https://tse3.mm.bing.net/th/id/OIP.do58eFQ21lUgNHeZ3TUP1QHaF-?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
                 featured: true,
                 inStock: true
             },
@@ -138,7 +138,7 @@ class VenkatEnterprisesApp {
                 category: 'Survey',
                 price: 525000,
                 description: 'Advanced electronic total station with EDM for precise angle and distance measurements.',
-                image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                image: 'https://tse3.mm.bing.net/th/id/OIP.9xh1hmCL1UoHNNFIFPJ_tgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
                 featured: true,
                 inStock: true
             },
@@ -148,7 +148,7 @@ class VenkatEnterprisesApp {
                 category: 'Civil QC Lab',
                 price: 125000,
                 description: 'Digital compression testing machine for concrete cube and cylinder strength testing.',
-                image: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                image: 'https://civillabequipmentmanufacturer.com/wp-content/uploads/2023/12/compression-testing-machine-pillar-type-load-frame-hand-operated.png',
                 featured: true,
                 inStock: true
             },
@@ -158,7 +158,7 @@ class VenkatEnterprisesApp {
                 category: 'Construction',
                 price: 55000,
                 description: 'Portable concrete mixer with 100L capacity for small to medium construction projects.',
-                image: 'https://images.unsplash.com/photo-1581092919784-1c1b1b1b1b1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                image: 'https://tse1.mm.bing.net/th/id/OIP.roFKIZh3KzVhP2QGT3jiFgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
                 featured: true,
                 inStock: true
             },
@@ -168,7 +168,7 @@ class VenkatEnterprisesApp {
                 category: 'Safety',
                 price: 650,
                 description: 'ISI marked safety helmet with adjustable headband for construction site protection.',
-                image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc97?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                image: 'https://m.media-amazon.com/images/I/51M9AqXi45L.jpg',
                 inStock: true
             },
             {
@@ -177,7 +177,7 @@ class VenkatEnterprisesApp {
                 category: 'Power Tools',
                 price: 5500,
                 description: 'Professional cordless drill with 18V battery and complete accessory set.',
-                image: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                image: 'https://i5.walmartimages.com/seo/AIRXPRO-Cordless-Drill-21V-Power-Drill-Set-25-1-Position-Adjustable-Torque-Electric-2-Speed-Transmission-For-Screwdriving-And-Drilling-Black_403503c1-d664-4771-becf-cbf6b4c568cd.2e73f817631b3beb0b55358875e1ce38.jpeg',
                 featured: true,
                 inStock: true
             }
@@ -207,6 +207,21 @@ class VenkatEnterprisesApp {
         
         // Product filters
         this.initProductFilters();
+
+        // Product catalog: View Details event delegation
+        const productsGrid = document.getElementById('productsGrid');
+        if (productsGrid) {
+            productsGrid.addEventListener('click', (e) => {
+                const btn = e.target.closest('.view-details-btn');
+                if (btn && btn.dataset.id) {
+                    const productId = parseInt(btn.dataset.id, 10);
+                    const product = this.products.find(p => p.id === productId);
+                    if (product) {
+                        this.showProductModal(product);
+                    }
+                }
+            });
+        }
         
         // Header scroll effect
         this.initHeaderScroll();
@@ -463,8 +478,7 @@ class VenkatEnterprisesApp {
             '<span class="stock-status in-stock"><i class="fas fa-check"></i> In Stock</span>' : 
             '<span class="stock-status out-of-stock"><i class="fas fa-times"></i> Out of Stock</span>';
         
-        const featuredBadge = product.featured ? 
-            '<span class="product-badge"><i class="fas fa-star"></i> Featured</span>' : '';
+
 
         card.innerHTML = `
             <div class="product-image">
@@ -475,7 +489,6 @@ class VenkatEnterprisesApp {
                         View Details
                     </button>
                 </div>
-                ${featuredBadge}
             </div>
             <div class="product-info">
                 <div class="product-category">${product.category}</div>
@@ -496,54 +509,66 @@ class VenkatEnterprisesApp {
     }
 
     showProductModal(product) {
-        // Create modal HTML
-        const modalHTML = `
-            <div class="product-modal-overlay" id="productModal">
-                <div class="product-modal">
-                    <div class="modal-header">
-                        <h3>${product.name}</h3>
-                        <button class="modal-close" onclick="venkatApp.closeProductModal()">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="modal-content">
-                        <div class="modal-image">
-                            <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/500x300?text=Image+Not+Found'">
-                            ${product.featured ? '<span class="modal-badge"><i class="fas fa-star"></i> Featured</span>' : ''}
-                        </div>
-                        <div class="modal-details">
-                            <div class="product-category">${product.category}</div>
-                            <div class="product-price">₹${product.price.toLocaleString()}</div>
-                            <p class="product-description">${product.description}</p>
-                            ${product.specifications ? this.renderSpecifications(product.specifications) : ''}
-                            <div class="modal-actions">
-                                <button class="btn btn-primary" onclick="venkatApp.contactForQuote('${product.name}')">
-                                    <i class="fas fa-phone"></i>
-                                    Get Quote
+            try {
+                // Create modal HTML
+                const modalHTML = `
+                    <div class="product-modal-overlay" id="productModal">
+                        <div class="product-modal">
+                            <div class="modal-header">
+                                <h3>${product.name}</h3>
+                                <button class="modal-close" onclick="venkatApp.closeProductModal()">
+                                    <i class="fas fa-times"></i>
                                 </button>
-                                <button class="btn btn-outline" onclick="venkatApp.addToWishlist(${product.id})">
-                                    <i class="fas fa-heart"></i>
-                                    Add to Wishlist
-                                </button>
+                            </div>
+                            <div class="modal-content">
+                                <div class="modal-image">
+                                    <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/500x300?text=Image+Not+Found'">
+                                    ${product.featured ? '<span class="modal-badge"><i class="fas fa-star"></i> Featured</span>' : ''}
+                                </div>
+                                <div class="modal-details">
+                                    <div class="product-category">${product.category}</div>
+                                    <div class="product-price">₹${product.price.toLocaleString()}</div>
+                                    <p class="product-description">${product.description}</p>
+                                    ${product.specifications ? this.renderSpecifications(product.specifications) : ''}
+                                    <div class="modal-actions">
+                                        <button class="btn btn-primary" onclick="venkatApp.contactForQuote('${product.name}')">
+                                            <i class="fas fa-phone"></i>
+                                            Get Quote
+                                        </button>
+                                        <button class="btn btn-outline" onclick="venkatApp.addToWishlist(${product.id})">
+                                            <i class="fas fa-heart"></i>
+                                            Add to Wishlist
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        `;
+                `;
 
-        // Add modal to DOM
-        document.body.insertAdjacentHTML('beforeend', modalHTML);
-        
-        // Prevent body scroll
-        document.body.style.overflow = 'hidden';
-        
-        // Close modal on overlay click
-        document.getElementById('productModal').addEventListener('click', (e) => {
-            if (e.target.classList.contains('product-modal-overlay')) {
-                this.closeProductModal();
+                // Add modal to DOM
+                document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+                // Prevent body scroll
+                document.body.style.overflow = 'hidden';
+            
+                // Close modal on overlay click
+                document.getElementById('productModal').addEventListener('click', (e) => {
+                    if (e.target.classList.contains('product-modal-overlay')) {
+                        this.closeProductModal();
+                    }
+                });
+
+                // Add Escape key support to close modal
+                document.addEventListener('keydown', this._escModalHandler = (e) => {
+                    if (e.key === 'Escape') {
+                        this.closeProductModal();
+                    }
+                });
+            } catch (err) {
+                console.error('Error in showProductModal:', err);
+                alert('An error occurred while displaying the product details. Please try again.');
             }
-        });
     }
 
     renderSpecifications(specs) {
@@ -557,11 +582,16 @@ class VenkatEnterprisesApp {
     }
 
     closeProductModal() {
-        const modal = document.getElementById('productModal');
-        if (modal) {
-            modal.remove();
-            document.body.style.overflow = '';
-        }
+            const modal = document.getElementById('productModal');
+            if (modal) {
+                modal.remove();
+                document.body.style.overflow = '';
+            }
+            // Remove Escape key event listener if present
+            if (this._escModalHandler) {
+                document.removeEventListener('keydown', this._escModalHandler);
+                this._escModalHandler = null;
+            }
     }
 
     contactForQuote(productName) {
