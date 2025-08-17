@@ -10,7 +10,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
   <!-- PRELOADER -->
@@ -26,60 +26,61 @@
     <i class="fas fa-arrow-up"></i>
   </button>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="container header-content">
-      <a href="#" class="logo" aria-label="Venkat Enterprises Home">
-        <div class="logo-icon"><i class="fas fa-industry"></i></div>
-        <div class="logo-text">
-          <h1>Venkat Enterprises</h1>
-          <span>Survey • Civil QC • Construction</span>
-        </div>
-      </a>
-
-      <nav>
+    <section class="hero">
+        <div class="container1">    
+            <nav class="navbar">
+                <div class="col">
         <ul class="nav-list">
-          <li><a class="nav-link active" href="#hero">Home</a></li>
           <li><a class="nav-link" href="#products">Products</a></li>
           <li><a class="nav-link" href="#services">Services</a></li>
           <li><a class="nav-link" href="#about">About</a></li>
           <li><a class="nav-link" href="#contact">Contact</a></li>
           <li class="nav-cta">
-            <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
-              <i class="fas fa-moon"></i>
-            </button>
-          </li>
-        </ul>
-      </nav>
 
-      <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+                </div>
 
-  <!-- HERO -->
-<section id="hero" class="hero">
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <span class="hero-badge">Since 2008</span>
-    <div class="hero-text">
-      <h1>Trusted Partner for Survey, Civil QC Lab & Construction Tools</h1>
-      <p>Supplying precision instruments, civil quality control lab equipment, and durable construction tools — backed by expert support and fast service.</p>
+                <div class="nav-group nav-logo col">
+                    <a href="#" class="logo-text">Venket Enterprises</a>
+                </div>
+
+                <div class="nav-group nav-actions col">
+                  <div class="header-actions" data-animation="fadeInRight" data-delay="400">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+                    <button class="btn-pri">Get in Touch</button>
+                </div>
+            </nav>      
+        </div>
+
+        <p>Since 2008</p>
+        <h1>Trusted Partner for Survey, Civil QC Lab & Construction Tools</h1>
+    </section>
+
+ <div class="box1">
+
+    <div class="slide-box">
+        <div class="slider" data-slider data-interval="2000">
+            <img class="slide-initial-source" src="./images/slider/power-1.jpg" alt="a1">
+            <img class="slide-initial-source" src="./images/slider/power-2.jpg" alt="a2">
+            <img class="slide-initial-source" src="./images/slider/hand-tools.jpg" alt="a3">
+            <img class="slide-initial-source" src="./images/slider/construction.jpg" alt="a4">
+            <img class="slide-initial-source" src="./images/slider/civil1.jpg" alt="a5">
+            <img class="slide-initial-source" src="./images/slider/civil-2.jpg" alt="a6">
+            <img class="slide-initial-source" src="./images/slider/safety.jpg" alt="a7">          
+        </div>
+
+        <button class="prev" aria-label="Previous slide">‹</button>
+        <button class="next" aria-label="Next slide">›</button>
+        <div class="dots"></div>
     </div>
-    <div class="hero-buttons">
-      <a href="#products" class="btn btn-primary">
-        <i class="fas fa-boxes-stacked"></i> Browse Products
-      </a>
-      <a href="#contact" class="btn btn-secondary">
-        <i class="fas fa-phone"></i> Get in Touch
-      </a>
     </div>
-  </div>
-  <div id="heroScroll" class="hero-scroll" aria-label="Scroll down">
-    <i class="fas fa-angles-down"></i>
-  </div>
-</section>
 
 
   <!-- PRODUCTS -->
@@ -329,5 +330,6 @@
     });
   </script>
   <script src="./js/main.js"></script>
+  <script src="./js/slider.js"></script>
 </body>
 </html>
