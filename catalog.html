@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Catalog</title>
+  <link rel="stylesheet" href="style.css">
+   <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet"> -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venket Enterprises | Product Catalog</title>
+  <link rel="stylesheet" href="css/catalog.css">
+</head>
+<body>
+  <div class="catalog-outer">
+    <div class="catalog-container">
+      <header class="hero-header animated-fadein">
+        <div class="hero-content">
+          <h1><span class="brand">Venket Enterprises</span> <span class="catalog-title">Product Catalog</span></h1>
+          <p class="subtitle">Discover our best products for your business needs</p>
+        </div>
+      </header>
+      <section class="catalog-controls animated-slidein">
+        <div class="category-bar-scroll" id="categoryBar" aria-label="Product Categories">
+          <!-- Category buttons injected by JS -->
+        </div>
+        <div class="catalog-search-sort">
+          <input type="text" id="search" placeholder="Search products..." aria-label="Search products">
+          <select id="sortSelect" aria-label="Sort products">
+            <option value="default">Sort By</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="name-asc">Name: A-Z</option>
+            <option value="name-desc">Name: Z-A</option>
+          </select>
+        </div>
+      </section>
+      <main>
+        <div id="productContainer" class="product-grid">
+          <!-- Products injected by JS -->
+        </div>
+      </main>
+      <!-- Modal for product details -->
+      <div id="productModal" class="modal" style="display:none;">
+        <div class="modal-content animated-modal" role="dialog" aria-modal="true" aria-labelledby="modalBody">
+          <span class="close" id="closeModal" tabindex="0" aria-label="Close">&times;</span>
+          <div id="modalBody"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/catalog.js"></script>
+</body>
+</html>
+

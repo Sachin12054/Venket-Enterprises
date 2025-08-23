@@ -17,37 +17,6 @@
       "inStock": true
     },
     {
-      "id": 2,
-      "name": "Total Station",
-      "category": "Survey",
-      "price": 525000,
-      "description": "Advanced electronic total station with EDM for precise angle and distance measurements.",
-      "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      "featured": true,
-      "specifications": {
-        "angleAccuracy": "±2\"",
-        "distanceAccuracy": "±(2mm + 2ppm)",
-        "range": "5000m",
-        "batteryLife": "24 hours"
-      },
-      "inStock": true
-    },
-    {
-      "id": 3,
-      "name": "Digital Theodolite",
-      "category": "Survey",
-      "price": 22000,
-      "description": "Professional digital theodolite with LCD display for accurate horizontal and vertical angle measurements.",
-      "image": "https://images.unsplash.com/photo-1581092162384-8987c1d64718?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      "specifications": {
-        "accuracy": "±2\"",
-        "magnification": "30x",
-        "minimumReading": "1\" / 5\"",
-        "display": "Dual LCD"
-      },
-      "inStock": true
-    },
-    {
       "id": 4,
       "name": "Handheld GPS",
       "category": "Survey",
@@ -379,6 +348,96 @@
         "toolFree": "Quick change system"
       },
       "inStock": true
+    },
+    {
+      "id": 26,
+      "name": "Laser Level",
+      "category": "Survey",
+      "price": 14500,
+      "description": "Self-leveling laser level for quick and accurate alignment tasks.",
+      "image": "https://images.unsplash.com/photo-1581092335878-4b1d70b6b1b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "accuracy": "±3mm/10m",
+        "range": "20m",
+        "batteryLife": "15 hours",
+        "mount": "Magnetic"
+      },
+      "inStock": true
+    },
+    {
+      "id": 27,
+      "name": "Digital Caliper",
+      "category": "Measuring",
+      "price": 3200,
+      "description": "Stainless steel digital caliper for precise internal and external measurements.",
+      "image": "https://images.unsplash.com/photo-1581092335878-4b1d70b6b1b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "range": "0-150mm",
+        "accuracy": "±0.02mm",
+        "display": "LCD",
+        "battery": "SR44"
+      },
+      "inStock": true
+    },
+    {
+      "id": 28,
+      "name": "Welding Machine",
+      "category": "Welding",
+      "price": 18500,
+      "description": "Portable inverter welding machine for on-site fabrication and repairs.",
+      "image": "https://images.unsplash.com/photo-1581092335878-4b1d70b6b1c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "inputVoltage": "220V",
+        "outputCurrent": "20-200A",
+        "weight": "6kg",
+        "dutyCycle": "60%"
+      },
+      "inStock": true
+    },
+    {
+      "id": 29,
+      "name": "Safety Net",
+      "category": "Safety",
+      "price": 1200,
+      "description": "Heavy-duty safety net for fall protection at construction sites.",
+      "image": "https://images.unsplash.com/photo-1578662996442-48f60103fc9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "material": "HDPE",
+        "meshSize": "100mm x 100mm",
+        "size": "3m x 10m",
+        "color": "Green"
+      },
+      "inStock": true
+    },
+    {
+      "id": 30,
+      "name": "Tool Kit Set",
+      "category": "Hand Tools",
+      "price": 2500,
+      "description": "Comprehensive hand tool kit for general maintenance and repairs.",
+      "image": "https://images.unsplash.com/photo-1572981779307-38b8cabb240c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "pieces": "120",
+        "case": "Plastic",
+        "weight": "4kg",
+        "tools": "Wrenches, pliers, screwdrivers, etc."
+      },
+      "inStock": true
+    },
+    {
+      "id": 31,
+      "name": "Cutting Wheel",
+      "category": "Consumables",
+      "price": 120,
+      "description": "High-performance cutting wheel for metal and steel applications.",
+      "image": "https://images.unsplash.com/photo-1572981779307-38b8cabb240d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      "specifications": {
+        "diameter": "107mm",
+        "thickness": "1.2mm",
+        "bore": "16mm",
+        "maxRPM": "15200"
+      },
+      "inStock": true
     }
   ],
   "categories": [
@@ -411,6 +470,30 @@
       "displayName": "Power Tools",
       "description": "Professional power tools for various applications",
       "icon": "fas fa-tools"
+    },
+    {
+      "name": "Measuring",
+      "displayName": "Measuring Tools",
+      "description": "Precision measuring instruments for engineering and construction",
+      "icon": "fas fa-ruler"
+    },
+    {
+      "name": "Welding",
+      "displayName": "Welding Equipment",
+      "description": "Reliable welding machines and accessories for fabrication and repair",
+      "icon": "fas fa-fire"
+    },
+    {
+      "name": "Hand Tools",
+      "displayName": "Hand Tools",
+      "description": "Comprehensive hand tool kits for maintenance and repair",
+      "icon": "fas fa-wrench"
+    },
+    {
+      "name": "Consumables",
+      "displayName": "Consumables",
+      "description": "High-performance consumables for construction and fabrication",
+      "icon": "fas fa-cogs"
     }
   ]
 }
