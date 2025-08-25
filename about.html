@@ -1,26 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
-    <link rel="stylesheet" href="styles/about.css"> <!-- Member 1: Create 'about.css' later for styling -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About | Venkat Enterprises</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css" />
+  <style>
+    .about-main { max-width: 900px; margin: 48px auto 0 auto; background: #fff; border-radius: 18px; box-shadow: 0 4px 32px rgba(255,145,0,0.08); padding: 36px 32px; }
+    .about-header { text-align: center; margin-bottom: 32px; }
+    .about-header h1 { color: #ff9100; font-size: 2.2rem; margin-bottom: 8px; }
+    .about-header p { color: #555; font-size: 1.1rem; }
+    .about-content { line-height: 1.8; color: #444; font-size: 1rem; margin-bottom: 32px; }
+    .about-content h2 { color: #ff6d00; margin: 24px 0 12px 0; font-size: 1.4rem; }
+    .about-content ul { margin: 16px 0; padding-left: 24px; }
+    .about-content li { margin-bottom: 8px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 32px 0; }
+    .stat-card { background: #fff3e0; border-radius: 12px; padding: 24px; text-align: center; box-shadow: 0 2px 8px rgba(255,145,0,0.06); }
+    .stat-card .number { font-size: 2.5rem; font-weight: 700; color: #ff9100; margin-bottom: 8px; }
+    .stat-card .label { color: #ff6d00; font-weight: 600; }
+    @media (max-width: 768px) { .about-main { padding: 18px 6vw; } .stats-grid { grid-template-columns: 1fr; gap: 16px; } }
+  </style>
 </head>
 <body>
-    <!-- Member 1: Add a navigation bar at the top (Home, About, Contact) using <nav> -->
+  <nav style="background: rgba(0, 0, 0, 0.8); padding: 1rem; text-align: center; margin-bottom: 20px;">
+    <a href="index.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Home</a>
+    <a href="about.html" style="color: #ff9100; text-decoration: none; margin: 0 15px; font-weight: 600;">About</a>
+    <a href="catalog.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Catalog</a>
+    <a href="contact.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Contact</a>
+    <a href="quote.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Quote</a>
+    <a href="warranty.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Warranty</a>
+  </nav>
+  <div class="about-main">
+    <div class="about-header">
+      <h1>About Venkat Enterprises</h1>
+      <p>Discover the legacy and expertise behind our trusted name in survey, civil QC lab, and construction equipment.</p>
+    </div>
+    <div class="about-content">
+      <h2>Our Story</h2>
+      <p>Since 2008, Venkat Enterprises has been a trusted leader in supplying and servicing high-quality survey instruments, civil QC lab equipment, and advanced construction tools. We are committed to delivering excellence through superior product availability, rigorous quality standards, and reliable customer support tailored to your needs.</p>
+      
+      <h2>What We Do</h2>
+      <ul>
+        <li><strong>Survey Equipment:</strong> Digital auto levels, total stations, theodolites, GPS units, and laser distance meters</li>
+        <li><strong>Civil QC Lab:</strong> Compression testing machines, sieve shakers, Vicat apparatus, slump cones, and CBR test equipment</li>
+        <li><strong>Construction Tools:</strong> Concrete mixers, needle vibrators, plate compactors, cut-off machines, and rebar cutters</li>
+        <li><strong>Safety Equipment:</strong> Helmets, gloves, harnesses, goggles, shoes, and safety nets</li>
+        <li><strong>Power Tools:</strong> Drills, grinders, impact drivers, circular saws, and multi-tools</li>
+      </ul>
+      
+      <h2>Our Mission</h2>
+      <p>To provide reliable, high-quality equipment and exceptional service that helps our clients achieve precision, safety, and success in their projects. We believe in building long-term relationships through trust, expertise, and dedicated support.</p>
+      
+      <h2>Why Choose Us</h2>
+      <ul>
+        <li>15+ years of industry expertise and experience</li>
+        <li>500+ quality products from trusted manufacturers</li>
+        <li>1000+ successful projects completed</li>
+        <li>24/7 customer support and technical assistance</li>
+        <li>Fast delivery and reliable logistics</li>
+        <li>Certified calibration and repair services</li>
+        <li>Comprehensive training and demos</li>
+      </ul>
+    </div>
     
-    <!-- Member 1: Create a main heading saying "About Us" -->
-    
-    <!-- Member 1: Add a short description paragraph about the website/project -->
-    
-    <!-- Member 1: Create a section to display team member details -->
-    
-    <!-- Member 1: Add a "Our Mission" section -->
-    <!-- Explain the goal or purpose of the website in 3–4 lines -->
-    
-    <!-- Member 1: Add a footer with:
-         - Website name
-         - Current year
-         - A link to Contact page -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="number">15+</div>
+        <div class="label">Years of Expertise</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">500+</div>
+        <div class="label">Quality Products</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">1K+</div>
+        <div class="label">Projects Completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">24/7</div>
+        <div class="label">Customer Support</div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-industry"></i></div>
+            <div class="logo-text">
+              <h3>Venkat Enterprises</h3>
+              <span>Quality • Availability • Support</span>
+            </div>
+          </a>
+          <p>Supplying trusted survey, QC lab, construction & safety equipment with reliable after-sales.</p>
+          <div class="social-links">
+            <a href="https://wa.me/919876543210" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#products">Products</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+            <li><a href="warranty.html">Warranty</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+91 98765 43210</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>sales@venkatenterprises.example</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-location-dot"></i>
+            <span>Chennai, Tamil Nadu</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <p>© <span id="year"></span> Venkat Enterprises. All rights reserved.</p>
+        </div>
+        <div class="footer-legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+    });
+  </script>
 </body>
 </html>

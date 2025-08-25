@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Get a Quote | Venkat Enterprises</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css" />
+  <style>
+    .quote-main { max-width: 800px; margin: 48px auto 0 auto; background: #fff; border-radius: 18px; box-shadow: 0 4px 32px rgba(255,145,0,0.08); padding: 36px 32px; }
+    .quote-header { text-align: center; margin-bottom: 32px; }
+    .quote-header h1 { color: #ff9100; font-size: 2.2rem; margin-bottom: 8px; }
+    .quote-header p { color: #555; font-size: 1.1rem; }
+    .quote-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-bottom: 32px; }
+    .quote-card { background: #fff3e0; border-radius: 12px; padding: 24px; text-align: center; box-shadow: 0 2px 8px rgba(255,145,0,0.06); cursor: pointer; transition: all 0.2s; }
+    .quote-card:hover { transform: translateY(-4px); box-shadow: 0 4px 16px rgba(255,145,0,0.12); }
+    .quote-card i { font-size: 2.5rem; color: #ff9100; margin-bottom: 16px; }
+    .quote-card h3 { color: #ff6d00; margin-bottom: 8px; font-size: 1.2rem; }
+    .quote-card p { color: #444; font-size: 0.95rem; }
+    .quote-form { margin-top: 24px; }
+    .quote-form label { display: block; margin-bottom: 6px; color: #ff9100; font-weight: 600; }
+    .quote-form input, .quote-form textarea, .quote-form select { width: 100%; padding: 12px; border: 1.5px solid #ff9100; border-radius: 8px; margin-bottom: 18px; font-size: 1rem; background: #fff; }
+    .quote-form textarea { min-height: 120px; resize: vertical; }
+    .quote-form button { background: #ff9100; color: #fff; border: none; border-radius: 8px; padding: 12px 32px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: background 0.18s; }
+    .quote-form button:hover { background: #ff6d00; }
+    @media (max-width: 768px) { .quote-main { padding: 18px 6vw; } .quote-options { grid-template-columns: 1fr; gap: 16px; } }
+  </style>
+</head>
+<body>
+  <nav style="background: rgba(0, 0, 0, 0.8); padding: 1rem; text-align: center; margin-bottom: 20px;">
+    <a href="index.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Home</a>
+    <a href="about.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">About</a>
+    <a href="catalog.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Catalog</a>
+    <a href="contact.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Contact</a>
+    <a href="quote.html" style="color: #ff9100; text-decoration: none; margin: 0 15px; font-weight: 600;">Quote</a>
+    <a href="warranty.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Warranty</a>
+  </nav>
+  <div class="quote-main">
+    <div class="quote-header">
+      <h1>Get a Quote</h1>
+      <p>Choose your preferred method to get a customized quote for your equipment needs</p>
+    </div>
+    
+    <div class="quote-options">
+      <div class="quote-card" onclick="openWhatsApp()">
+        <i class="fab fa-whatsapp"></i>
+        <h3>WhatsApp Quote</h3>
+        <p>Get instant quotes via WhatsApp. Fast, convenient, and personal service.</p>
+      </div>
+      <div class="quote-card" onclick="showEmailForm()">
+        <i class="fas fa-envelope"></i>
+        <h3>Email Quote</h3>
+        <p>Send detailed requirements via email for comprehensive quotations.</p>
+      </div>
+      <div class="quote-card" onclick="callUs()">
+        <i class="fas fa-phone"></i>
+        <h3>Phone Quote</h3>
+        <p>Speak directly with our experts for immediate assistance and quotes.</p>
+      </div>
+    </div>
+    
+    <form class="quote-form" id="quoteForm" style="display:none;">
+      <h3 style="color: #ff9100; margin-bottom: 20px;">Email Quote Request</h3>
+      <label for="companyName">Company Name</label>
+      <input type="text" id="companyName" name="companyName" required>
+      
+      <label for="contactPerson">Contact Person</label>
+      <input type="text" id="contactPerson" name="contactPerson" required>
+      
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" required>
+      
+      <label for="category">Product Category</label>
+      <select id="category" name="category" required>
+        <option value="">Select Category</option>
+        <option value="Survey">Survey Equipment</option>
+        <option value="Civil QC Lab">Civil QC Lab</option>
+        <option value="Construction">Construction Tools</option>
+        <option value="Safety">Safety Equipment</option>
+        <option value="Power Tools">Power Tools</option>
+        <option value="Mixed">Mixed Categories</option>
+      </select>
+      
+      <label for="requirements">Detailed Requirements</label>
+      <textarea id="requirements" name="requirements" placeholder="Please list specific products, quantities, delivery location, and any special requirements..." required></textarea>
+      
+      <label for="timeline">Required Timeline</label>
+      <input type="text" id="timeline" name="timeline" placeholder="e.g., Within 2 weeks, Urgent, etc.">
+      
+      <button type="submit">Send Quote Request</button>
+    </form>
+    
+    <div id="formStatus" style="text-align:center;margin-top:12px;color:#ff9100;font-weight:600;"></div>
+  </div>
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-industry"></i></div>
+            <div class="logo-text">
+              <h3>Venkat Enterprises</h3>
+              <span>Quality • Availability • Support</span>
+            </div>
+          </a>
+          <p>Supplying trusted survey, QC lab, construction & safety equipment with reliable after-sales.</p>
+          <div class="social-links">
+            <a href="https://wa.me/919876543210" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#products">Products</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+            <li><a href="warranty.html">Warranty</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+91 98765 43210</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>sales@venkatenterprises.example</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-location-dot"></i>
+            <span>Chennai, Tamil Nadu</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <p>© <span id="year"></span> Venkat Enterprises. All rights reserved.</p>
+        </div>
+        <div class="footer-legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    function openWhatsApp() {
+      const message = encodeURIComponent("Hi, I would like to get a quote for equipment from Venkat Enterprises. Please help me with pricing and availability.");
+      window.open("https://wa.me/919876543210?text=" + message, '_blank');
+    }
+    
+    function showEmailForm() {
+      document.getElementById('quoteForm').style.display = 'block';
+      document.getElementById('quoteForm').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function callUs() {
+      window.location.href = "tel:+919876543210";
+    }
+    
+    document.getElementById('quoteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('formStatus').textContent = 'Thank you! Your quote request has been submitted. We will respond within 24 hours.';
+      this.reset();
+    });
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>

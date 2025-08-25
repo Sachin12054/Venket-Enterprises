@@ -1,48 +1,833 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
-    <link rel="stylesheet" href="styles/contact.css"> <!-- Member 1 also create contact.css -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact | Venkat Enterprises</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .professional-nav {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(40, 40, 40, 0.95));
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            text-align: center;
+            margin-bottom: 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .professional-nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+        
+        .professional-nav a:hover {
+            background: rgba(255, 145, 0, 0.1);
+            color: #ff9100;
+            transform: translateY(-2px);
+        }
+        
+        .professional-nav a.active {
+            color: #ff9100;
+            background: rgba(255, 145, 0, 0.15);
+        }
+        
+        .contact-main { 
+            max-width: 900px; 
+            margin: 48px auto; 
+            background: #fff; 
+            border-radius: 24px; 
+            box-shadow: 0 20px 60px rgba(255,145,0,0.15), 0 8px 32px rgba(0,0,0,0.08); 
+            padding: 48px 40px; 
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        .contact-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff9100, #ff6d00, #ff9100);
+            animation: shimmer 2s ease-in-out infinite;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+        
+        .contact-header { 
+            text-align: center; 
+            margin-bottom: 48px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        .contact-header h1 { 
+            color: #ff9100; 
+            font-size: 2.8rem; 
+            margin-bottom: 12px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff9100, #ff6d00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+        
+        .contact-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff9100, #ff6d00);
+            border-radius: 2px;
+        }
+        
+        .contact-header p { 
+            color: #666; 
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-info-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 32px; 
+            margin-bottom: 48px;
+        }
+        
+        .contact-card { 
+            background: linear-gradient(135deg, #fff3e0 0%, #fff8f0 100%); 
+            border-radius: 16px; 
+            padding: 32px 24px; 
+            text-align: center; 
+            box-shadow: 0 8px 32px rgba(255,145,0,0.1); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            border: 1px solid rgba(255,145,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+        
+        .contact-card:nth-child(2) { animation-delay: 0.5s; }
+        .contact-card:nth-child(3) { animation-delay: 0.6s; }
+        
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,145,0,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .contact-card:hover::before {
+            left: 100%;
+        }
+        
+        .contact-card:hover { 
+            transform: translateY(-8px) scale(1.02); 
+            box-shadow: 0 20px 60px rgba(255,145,0,0.2);
+        }
+        
+        .contact-card i { 
+            font-size: 2.5rem; 
+            color: #ff9100; 
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        .contact-card:hover i {
+            transform: scale(1.2);
+            animation: pulse 1s ease-in-out infinite;
+        }
+        
+        .contact-card h3 { 
+            margin: 0 0 12px 0; 
+            color: #ff6d00; 
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .contact-card p, .contact-card ul { 
+            color: #555; 
+            font-size: 1rem; 
+            margin: 8px 0; 
+            padding: 0; 
+            list-style: none;
+            line-height: 1.6;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .contact-card p {
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .contact-card ul {
+            margin-top: 12px;
+        }
+        
+        .contact-card ul li {
+            margin: 4px 0;
+            text-align: center;
+        }
+        
+        .contact-card a {
+            color: #ff9100;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-card a:hover {
+            color: #ff6d00;
+            text-decoration: underline;
+        }
+        
+        .contact-card {
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            user-select: none;
+        }
+        
+        .contact-card:hover {
+            cursor: pointer;
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 70px rgba(255,145,0,0.25);
+        }
+        
+        .contact-card:active {
+            transform: translateY(-8px) scale(1.01);
+            transition: all 0.1s ease;
+        }
+        
+        .contact-card::after {
+            content: 'Click to contact';
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 145, 0, 0.1);
+            color: #ff9100;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        
+        .contact-card:hover::after {
+            opacity: 1;
+        }
+        
+        .contact-form { 
+            margin-top: 48px;
+            animation: fadeInUp 0.8s ease-out 0.7s both;
+        }
+        
+        .form-group {
+            position: relative;
+            margin-bottom: 24px;
+        }
+        
+        .contact-form label { 
+            display: block; 
+            margin-bottom: 8px; 
+            color: #ff9100; 
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-form input, .contact-form textarea { 
+            width: 100%; 
+            padding: 16px 20px; 
+            border: 2px solid #e0e0e0; 
+            border-radius: 12px; 
+            font-size: 1rem; 
+            background: #fff;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: #ff9100;
+            box-shadow: 0 0 0 4px rgba(255,145,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .contact-form textarea { 
+            min-height: 120px; 
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #ff9100, #ff6d00);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 32px rgba(255,145,0,0.3);
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 48px rgba(255,145,0,0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        #formStatus {
+            text-align: center;
+            margin-top: 20px;
+            color: #ff9100;
+            font-weight: 600;
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        #formStatus.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .floating-elements::before,
+        .floating-elements::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, rgba(255,145,0,0.1), rgba(255,109,0,0.1));
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-elements::before {
+            top: 10%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-elements::after {
+            bottom: 10%;
+            left: 10%;
+            animation-delay: 3s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.6;
+            }
+        }
+        
+        /* Loading Animation for Form Submission */
+        .loading {
+            position: relative;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        /* Success Animation */
+        .success-animation {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .success-animation::before {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            animation: successPop 0.6s ease-out forwards;
+        }
+        
+        @keyframes successPop {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 768px) { 
+            .contact-main { 
+                margin: 20px; 
+                padding: 32px 24px; 
+            } 
+            
+            .contact-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .contact-info-grid { 
+                grid-template-columns: 1fr;
+                gap: 24px; 
+            }
+            
+            .contact-card {
+                padding: 24px 20px;
+                min-height: 180px;
+            }
+            
+            .contact-card p {
+                font-size: 0.9rem;
+            }
+            
+            .contact-card ul {
+                font-size: 0.9rem;
+            }
+            
+            .submit-btn {
+                width: 100%;
+                padding: 18px;
+            }
+            
+            .professional-nav {
+                padding: 1rem;
+            }
+            
+            .professional-nav a {
+                margin: 0 10px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-main {
+                margin: 10px;
+                padding: 24px 16px;
+            }
+            
+            .contact-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .professional-nav a {
+                margin: 0 5px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-    
-    <!-- =============================
-         HEADER SECTION
-         =============================
-         1. Add your website's navigation menu here (links to Home, About, Contact).
-    -->
-    <header>
-        <!-- TODO: Add navigation bar -->
-    </header>
+    <nav class="professional-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="catalog.html">Catalog</a>
+        <a href="contact.html" class="active">Contact</a>
+        <a href="quote.html">Quote</a>
+        <a href="warranty.html">Warranty</a>
+    </nav>
 
-    <!-- =============================
-         MAIN CONTACT FORM
-         =============================
-          Create a section with a heading "Contact Us"..
-    -->
-    <main>
-        <section>
-            <!-- TODO: Add contact form here -->
-        </section>
-    </main>
+    <div class="contact-main">
+        <div class="floating-elements"></div>
+        
+        <div class="contact-header">
+            <h1>Contact Us</h1>
+            <p>Get in touch with our team for professional consultation, quick quotes, and reliable support. We're here to help you find the perfect solution for your needs.</p>
+        </div>
+        
+        <div class="contact-info-grid">
+            <div class="contact-card" onclick="openWhatsApp()">
+                <i class="fab fa-whatsapp"></i>
+                <h3>WhatsApp</h3>
+                <p><a href="https://wa.me/919876543210?text=Hello%20Venkat%20Enterprises%2C%20I%20would%20like%20to%20inquire%20about%20your%20products%20and%20services." target="_blank">+91 98765 43210</a></p>
+                <ul><li>Business hours: 9am – 7pm</li><li>Instant responses</li></ul>
+            </div>
+            <div class="contact-card" onclick="openEmail()">
+                <i class="fas fa-envelope-open-text"></i>
+                <h3>Email</h3>
+                <p><a href="mailto:sales@venkatenterprises.example?subject=Inquiry%20about%20Products%20and%20Services&body=Hello%20Venkat%20Enterprises%2C%0A%0AI%20would%20like%20to%20inquire%20about%20your%20products%20and%20services.%20Please%20provide%20me%20with%20more%20information.%0A%0AThank%20you.">sales@venkatenterprises.example</a></p>
+                <ul><li>RFQ turnaround: &lt;24h</li><li>Detailed quotations</li></ul>
+            </div>
+            <div class="contact-card" onclick="showLocationInfo()">
+                <i class="fas fa-location-dot"></i>
+                <h3>Office</h3>
+                <p>Chennai, Tamil Nadu</p>
+                <ul><li>Visits by appointment</li><li>Product demonstrations</li></ul>
+            </div>
+        </div>
+        
+        <form class="contact-form" id="contactForm" autocomplete="off">
+            <div class="form-group">
+                <label for="name">Your Name *</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="email">Your Email *</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email address">
+            </div>
+            <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company" placeholder="Your company name (optional)">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Your contact number (optional)">
+            </div>
+            <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" required placeholder="Tell us about your requirements, project details, or any questions you have..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+        </form>
+        
+        <div id="formStatus"></div>
+    </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <div class="logo-icon"><i class="fas fa-industry"></i></div>
+                            <div class="logo-text">
+                                <h3>Venkat Enterprises</h3>
+                                <span>Quality • Availability • Support</span>
+                            </div>
+                        </a>
+                        <p>Supplying trusted survey, QC lab, construction & safety equipment with reliable after-sales.</p>
+                        <div class="social-links">
+                            <a href="https://wa.me/919876543210" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="index.html#services">Services</a></li>
+                            <li><a href="index.html#products">Products</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="quote.html">Get a Quote</a></li>
+                            <li><a href="warranty.html">Warranty</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-contact">
+                        <h4>Contact</h4>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 98765 43210</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>sales@venkatenterprises.example</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-location-dot"></i>
+                            <span>Chennai, Tamil Nadu</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="footer-copyright">
+                        <p>© <span id="year"></span> Venkat Enterprises. All rights reserved.</p>
+                    </div>
+                    <div class="footer-legal">
+                        <a href="#">Privacy</a>
+                        <a href="#">Terms</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script>
+            // Set footer year
+            document.addEventListener('DOMContentLoaded', () => {
+                const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+            });
+        </script>
+    <script>
+        // Enhanced form submission with animations
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const formStatus = document.getElementById('formStatus');
+            
+            // Add loading animation
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = '';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission delay
+            setTimeout(() => {
+                // Remove loading animation
+                submitBtn.classList.remove('loading');
+                submitBtn.classList.add('success-animation');
+                
+                // Show success message
+                formStatus.textContent = '✓ Thank you! Your message has been received. We\'ll get back to you within 24 hours.';
+                formStatus.classList.add('show');
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button after animation
+                setTimeout(() => {
+                    submitBtn.classList.remove('success-animation');
+                    submitBtn.textContent = 'Send Message';
+                    submitBtn.disabled = false;
+                    
+                    // Hide status message after 5 seconds
+                    setTimeout(() => {
+                        formStatus.classList.remove('show');
+                    }, 5000);
+                }, 2000);
+                
+            }, 1500);
+        });
 
-    <!-- =============================
-         FOOTER
-         =============================
-         1. Add simple footer text like "© 2025 Venkat Enterprises".
-         2. Center-align the text.
-    -->
-    <footer>
-        <!-- TODO: Add footer content -->
-    </footer>
+        // Add input focus animations
+        const inputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
 
-    <!-- =============================
-         OPTIONAL (For Extra Learning)
-         =============================
-         1. Add a Google Maps iframe showing your location.
-         2. Or add social media icons (Facebook, Instagram).
-    -->
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe contact cards for staggered animations
+        document.querySelectorAll('.contact-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // WhatsApp functionality
+        function openWhatsApp() {
+            const phoneNumber = '919876543210';
+            const message = encodeURIComponent('Hello Venkat Enterprises, I would like to inquire about your products and services.');
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+            
+            // Add click animation
+            const card = event.target.closest('.contact-card');
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                card.style.transform = '';
+            }, 150);
+            
+            window.open(whatsappURL, '_blank');
+        }
+
+        // Email functionality
+        function openEmail() {
+            const email = 'sales@venkatenterprises.example';
+            const subject = encodeURIComponent('Inquiry about Products and Services');
+            const body = encodeURIComponent(`Hello Venkat Enterprises,
+
+I would like to inquire about your products and services. Please provide me with more information.
+
+Thank you.`);
+            
+            const emailURL = `mailto:${email}?subject=${subject}&body=${body}`;
+            
+            // Add click animation
+            const card = event.target.closest('.contact-card');
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                card.style.transform = '';
+            }, 150);
+            
+            window.location.href = emailURL;
+        }
+
+        // Location functionality
+        function showLocationInfo() {
+            const location = 'Chennai, Tamil Nadu, India';
+            const googleMapsURL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
+            
+            // Add click animation
+            const card = event.target.closest('.contact-card');
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                card.style.transform = '';
+            }, 150);
+            
+            // Show alert with options
+            if (confirm('Would you like to open Google Maps to get directions to our office in Chennai?')) {
+                window.open(googleMapsURL, '_blank');
+            }
+        }
+
+        // Prevent link clicks from triggering card clicks
+        document.querySelectorAll('.contact-card a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
 </body>
 </html>

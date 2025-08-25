@@ -126,18 +126,28 @@
     gap: 0.7rem;
 }
 /* ===== ABOUT STATS ROWS ===== */
-.about-stats-row {
-    display: flex;
-    justify-content: center;
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1.5rem 2.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    justify-items: center;
     align-items: center;
-    gap: 2.2rem;
-    margin-bottom: 0.7rem;
+}
+.about-stats-row {
+    display: contents;
 }
 .about-stats-row-top {
-    margin-bottom: 1.5rem;
+    display: contents;
 }
 .about-stats-row-bottom {
-    justify-content: center;
+    display: contents;
+}
+.about-stats-row-bottom .stat-item {
+    grid-column: 2 / 3;
+    grid-row: 2;
 }
 .stat-item {
     background: #fff3e0;
@@ -145,13 +155,15 @@
     box-shadow: 0 2px 12px rgba(255,152,0,0.08);
     padding: 1.2rem 1.5rem;
     text-align: center;
-    min-width: 120px;
+    min-width: 140px;
+    max-width: 160px;
     min-height: 90px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     transition: box-shadow 0.2s, transform 0.2s;
+    flex: 0 0 auto;
 }
 .stat-item:hover {
     box-shadow: 0 6px 24px rgba(255,152,0,0.18);
@@ -172,27 +184,52 @@
 .stat-item-center {
     margin-left: auto;
     margin-right: auto;
+    align-self: center;
+    justify-self: center;
 }
 @media (max-width: 900px) {
-    .about-stats-row {
-        gap: 1.1rem;
+    .about-stats {
+        max-width: 500px;
+        gap: 1.1rem 1.8rem;
     }
     .stat-item {
-        min-width: 90px;
+        min-width: 110px;
+        max-width: 130px;
         padding: 1rem 0.7rem;
     }
 }
 @media (max-width: 600px) {
-    .about-stats-row {
+    .about-stats {
+        display: flex;
         flex-direction: column;
         gap: 0.7rem;
+        max-width: 100%;
+    }
+    .about-stats-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        width: 100%;
     }
     .about-stats-row-top {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
         margin-bottom: 0.7rem;
+    }
+    .about-stats-row-bottom {
+        display: flex;
+        justify-content: center;
+    }
+    .about-stats-row-bottom .stat-item {
+        grid-column: auto;
+        grid-row: auto;
     }
     .stat-item {
         min-width: 0;
+        max-width: none;
         width: 100%;
+        max-width: 280px;
     }
 }
 /* ===== ABOUT STATS GRID ===== */
