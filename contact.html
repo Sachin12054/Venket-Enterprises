@@ -6,7 +6,6 @@
     <title>Contact | Venkat Enterprises</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css" />
     <style>
         * {
             box-sizing: border-box;
@@ -338,9 +337,84 @@
             transform: translateY(-2px);
         }
         
+        .contact-form input.invalid, .contact-form textarea.invalid {
+            border-color: #e53e3e;
+            box-shadow: 0 0 0 4px rgba(229, 62, 62, 0.1);
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        .contact-form input.valid, .contact-form textarea.valid {
+            border-color: #38a169;
+            box-shadow: 0 0 0 4px rgba(56, 161, 105, 0.1);
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
         .contact-form textarea { 
             min-height: 120px; 
             resize: vertical;
+        }
+        
+        .error-message {
+            color: #e53e3e;
+            font-size: 0.875rem;
+            margin-top: 6px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            display: block;
+            min-height: 20px;
+        }
+        
+        .error-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .success-message {
+            color: #38a169;
+            font-size: 0.875rem;
+            margin-top: 6px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            display: block;
+            min-height: 20px;
+        }
+        
+        .success-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .validation-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+        
+        .form-group.has-textarea .validation-icon {
+            top: 48px;
+        }
+        
+        .validation-icon.valid {
+            color: #38a169;
+            opacity: 1;
+        }
+        
+        .validation-icon.invalid {
+            color: #e53e3e;
+            opacity: 1;
         }
         
         .submit-btn {
@@ -360,6 +434,12 @@
             box-shadow: 0 8px 32px rgba(255,145,0,0.3);
         }
         
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
         .submit-btn::before {
             content: '';
             position: absolute;
@@ -371,33 +451,48 @@
             transition: left 0.5s ease;
         }
         
-        .submit-btn:hover::before {
+        .submit-btn:not(:disabled):hover::before {
             left: 100%;
         }
         
-        .submit-btn:hover {
+        .submit-btn:not(:disabled):hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 48px rgba(255,145,0,0.4);
         }
         
-        .submit-btn:active {
+        .submit-btn:not(:disabled):active {
             transform: translateY(-1px);
         }
         
         #formStatus {
             text-align: center;
             margin-top: 20px;
-            color: #ff9100;
             font-weight: 600;
             font-size: 1.1rem;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.5s ease;
+            padding: 16px;
+            border-radius: 12px;
+            display: none;
         }
         
         #formStatus.show {
             opacity: 1;
             transform: translateY(0);
+            display: block;
+        }
+        
+        #formStatus.success {
+            background: rgba(56, 161, 105, 0.1);
+            color: #38a169;
+            border: 2px solid rgba(56, 161, 105, 0.2);
+        }
+        
+        #formStatus.error {
+            background: rgba(229, 62, 62, 0.1);
+            color: #e53e3e;
+            border: 2px solid rgba(229, 62, 62, 0.2);
         }
         
         .floating-elements {
@@ -502,6 +597,145 @@
             }
         }
         
+        .footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            color: #fff;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-brand .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, #ff9100, #ff6d00);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .logo-icon i {
+            color: #fff;
+            font-size: 1.5rem;
+        }
+        
+        .logo-text h3 {
+            color: #fff;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .logo-text span {
+            color: #ff9100;
+            font-size: 0.9rem;
+        }
+        
+        .footer-brand p {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #ff9100;
+        }
+        
+        .footer-links h4 {
+            color: #ff9100;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links ul li a:hover {
+            color: #ff9100;
+        }
+        
+        .footer-contact h4 {
+            color: #ff9100;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+        
+        .footer-contact-item i {
+            color: #ff9100;
+            width: 20px;
+            margin-right: 15px;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-copyright p {
+            margin: 0;
+            color: #ccc;
+        }
+        
+        .footer-legal a {
+            color: #ccc;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-legal a:hover {
+            color: #ff9100;
+        }
+        
         @media (max-width: 768px) { 
             .contact-main { 
                 margin: 20px; 
@@ -542,6 +776,16 @@
             .professional-nav a {
                 margin: 0 10px;
                 font-size: 0.9rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 15px;
             }
         }
         
@@ -585,13 +829,13 @@
                 <i class="fab fa-whatsapp"></i>
                 <h3>WhatsApp</h3>
                 <p><a href="https://wa.me/919876543210?text=Hello%20Venkat%20Enterprises%2C%20I%20would%20like%20to%20inquire%20about%20your%20products%20and%20services." target="_blank">+91 98765 43210</a></p>
-                <ul><li>Business hours: 9am – 7pm</li><li>Instant responses</li></ul>
+                <ul><li>Instant responses</li></ul>
             </div>
             <div class="contact-card" onclick="openEmail()">
                 <i class="fas fa-envelope-open-text"></i>
                 <h3>Email</h3>
                 <p><a href="mailto:sales@venkatenterprises.example?subject=Inquiry%20about%20Products%20and%20Services&body=Hello%20Venkat%20Enterprises%2C%0A%0AI%20would%20like%20to%20inquire%20about%20your%20products%20and%20services.%20Please%20provide%20me%20with%20more%20information.%0A%0AThank%20you.">sales@venkatenterprises.example</a></p>
-                <ul><li>RFQ turnaround: &lt;24h</li><li>Detailed quotations</li></ul>
+                <ul><li>Detailed quotations</li></ul>
             </div>
             <div class="contact-card" onclick="showLocationInfo()">
                 <i class="fas fa-location-dot"></i>
@@ -601,172 +845,485 @@
             </div>
         </div>
         
-        <form class="contact-form" id="contactForm" autocomplete="off">
+        <form class="contact-form" id="contactForm" novalidate>
             <div class="form-group">
                 <label for="name">Your Name *</label>
-                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                <input type="text" id="name" name="name" required placeholder="Enter your full name" autocomplete="name">
+                <i class="fas fa-check validation-icon"></i>
+                <span class="error-message" id="nameError"></span>
             </div>
+            
             <div class="form-group">
                 <label for="email">Your Email *</label>
-                <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                <input type="email" id="email" name="email" required placeholder="Enter your email address" autocomplete="email">
+                <i class="fas fa-check validation-icon"></i>
+                <span class="error-message" id="emailError"></span>
             </div>
+            
             <div class="form-group">
                 <label for="company">Company</label>
-                <input type="text" id="company" name="company" placeholder="Your company name (optional)">
+                <input type="text" id="company" name="company" placeholder="Your company name (optional)" autocomplete="organization">
+                <i class="fas fa-check validation-icon"></i>
+                <span class="success-message" id="companySuccess"></span>
             </div>
+            
             <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="Your contact number (optional)">
+                <input type="tel" id="phone" name="phone" placeholder="Your contact number (optional)" autocomplete="tel">
+                <i class="fas fa-check validation-icon"></i>
+                <span class="error-message" id="phoneError"></span>
+                <span class="success-message" id="phoneSuccess"></span>
             </div>
-            <div class="form-group">
+            
+            <div class="form-group has-textarea">
                 <label for="message">Message *</label>
                 <textarea id="message" name="message" required placeholder="Tell us about your requirements, project details, or any questions you have..."></textarea>
+                <i class="fas fa-check validation-icon"></i>
+                <span class="error-message" id="messageError"></span>
             </div>
+            
             <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
         </form>
         
         <div id="formStatus"></div>
     </div>
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-brand">
-                        <a href="index.html" class="logo">
-                            <div class="logo-icon"><i class="fas fa-industry"></i></div>
-                            <div class="logo-text">
-                                <h3>Venkat Enterprises</h3>
-                                <span>Quality • Availability • Support</span>
-                            </div>
-                        </a>
-                        <p>Supplying trusted survey, QC lab, construction & safety equipment with reliable after-sales.</p>
-                        <div class="social-links">
-                            <a href="https://wa.me/919876543210" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon"><i class="fas fa-industry"></i></div>
+                        <div class="logo-text">
+                            <h3>Venkat Enterprises</h3>
+                            <span>Quality • Availability • Support</span>
                         </div>
-                    </div>
-                    <div class="footer-links">
-                        <h4>Company</h4>
-                        <ul>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="index.html#services">Services</a></li>
-                            <li><a href="index.html#products">Products</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-links">
-                        <h4>Support</h4>
-                        <ul>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="quote.html">Get a Quote</a></li>
-                            <li><a href="warranty.html">Warranty</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-contact">
-                        <h4>Contact</h4>
-                        <div class="footer-contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>+91 98765 43210</span>
-                        </div>
-                        <div class="footer-contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>sales@venkatenterprises.example</span>
-                        </div>
-                        <div class="footer-contact-item">
-                            <i class="fas fa-location-dot"></i>
-                            <span>Chennai, Tamil Nadu</span>
-                        </div>
+                    </a>
+                    <p>Supplying trusted survey, QC lab, construction & safety equipment with reliable after-sales.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/919876543210" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
-                <div class="footer-bottom">
-                    <div class="footer-copyright">
-                        <p>© <span id="year"></span> Venkat Enterprises. All rights reserved.</p>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#products">Products</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="quote.html">Get a Quote</a></li>
+                        <li><a href="warranty.html">Warranty</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 98765 43210</span>
                     </div>
-                    <div class="footer-legal">
-                        <a href="#">Privacy</a>
-                        <a href="#">Terms</a>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>sales@venkatenterprises.example</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-location-dot"></i>
+                        <span>Chennai, Tamil Nadu</span>
                     </div>
                 </div>
             </div>
-        </footer>
-        <script>
-            // Set footer year
-            document.addEventListener('DOMContentLoaded', () => {
-                const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
-            });
-        </script>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>© <span id="year"></span> Venkat Enterprises. All rights reserved.</p>
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // Enhanced form submission with animations
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const formStatus = document.getElementById('formStatus');
-            
-            // Add loading animation
-            submitBtn.classList.add('loading');
-            submitBtn.textContent = '';
-            submitBtn.disabled = true;
-            
-            // Simulate form submission delay
-            setTimeout(() => {
-                // Remove loading animation
-                submitBtn.classList.remove('loading');
-                submitBtn.classList.add('success-animation');
+        // Enhanced Form Validation System
+        class FormValidator {
+            constructor(formId) {
+                this.form = document.getElementById(formId);
+                this.fields = {
+                    name: {
+                        element: document.getElementById('name'),
+                        errorElement: document.getElementById('nameError'),
+                        rules: ['required', 'minLength:2', 'maxLength:50', 'nameFormat']
+                    },
+                    email: {
+                        element: document.getElementById('email'),
+                        errorElement: document.getElementById('emailError'),
+                        rules: ['required', 'email', 'maxLength:100']
+                    },
+                    company: {
+                        element: document.getElementById('company'),
+                        errorElement: document.getElementById('companySuccess'),
+                        successElement: document.getElementById('companySuccess'),
+                        rules: ['maxLength:100']
+                    },
+                    phone: {
+                        element: document.getElementById('phone'),
+                        errorElement: document.getElementById('phoneError'),
+                        successElement: document.getElementById('phoneSuccess'),
+                        rules: ['phone', 'maxLength:20']
+                    },
+                    message: {
+                        element: document.getElementById('message'),
+                        errorElement: document.getElementById('messageError'),
+                        rules: ['required', 'minLength:10', 'maxLength:1000']
+                    }
+                };
                 
-                // Show success message
-                formStatus.textContent = '✓ Thank you! Your message has been received. We\'ll get back to you within 24 hours.';
-                formStatus.classList.add('show');
+                this.submitBtn = document.getElementById('submitBtn');
+                this.formStatus = document.getElementById('formStatus');
+                this.isSubmitting = false;
                 
-                // Reset form
-                this.reset();
-                
-                // Reset button after animation
-                setTimeout(() => {
-                    submitBtn.classList.remove('success-animation');
-                    submitBtn.textContent = 'Send Message';
-                    submitBtn.disabled = false;
+                this.init();
+            }
+            
+            init() {
+                // Add event listeners for real-time validation
+                Object.keys(this.fields).forEach(fieldName => {
+                    const field = this.fields[fieldName];
                     
-                    // Hide status message after 5 seconds
-                    setTimeout(() => {
-                        formStatus.classList.remove('show');
-                    }, 5000);
-                }, 2000);
+                    // Real-time validation on input
+                    field.element.addEventListener('input', () => {
+                        this.validateField(fieldName);
+                        this.updateSubmitButton();
+                    });
+                    
+                    // Validation on blur
+                    field.element.addEventListener('blur', () => {
+                        this.validateField(fieldName);
+                        this.updateSubmitButton();
+                    });
+                    
+                    // Clear validation on focus
+                    field.element.addEventListener('focus', () => {
+                        this.clearFieldValidation(fieldName);
+                    });
+                });
                 
-            }, 1500);
-        });
-
-        // Add input focus animations
-        const inputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
-        inputs.forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'translateY(-2px)';
-            });
+                // Form submission
+                this.form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleSubmit();
+                });
+                
+                // Initial button state
+                this.updateSubmitButton();
+            }
             
-            input.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'translateY(0)';
-            });
-        });
-
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
+            validateField(fieldName) {
+                const field = this.fields[fieldName];
+                const value = field.element.value.trim();
+                const rules = field.rules;
+                
+                let isValid = true;
+                let errorMessage = '';
+                
+                for (const rule of rules) {
+                    const validation = this.applyRule(rule, value, fieldName);
+                    if (!validation.isValid) {
+                        isValid = false;
+                        errorMessage = validation.message;
+                        break;
+                    }
                 }
-            });
-        }, observerOptions);
-
-        // Observe contact cards for staggered animations
-        document.querySelectorAll('.contact-card').forEach(card => {
-            observer.observe(card);
+                
+                this.displayValidationResult(fieldName, isValid, errorMessage);
+                return isValid;
+            }
+            
+            applyRule(rule, value, fieldName) {
+                const [ruleName, ruleValue] = rule.split(':');
+                
+                switch (ruleName) {
+                    case 'required':
+                        return {
+                            isValid: value.length > 0,
+                            message: this.getFieldLabel(fieldName) + ' is required'
+                        };
+                        
+                    case 'minLength':
+                        return {
+                            isValid: value.length >= parseInt(ruleValue) || value.length === 0,
+                            message: this.getFieldLabel(fieldName) + ` must be at least ${ruleValue} characters`
+                        };
+                        
+                    case 'maxLength':
+                        return {
+                            isValid: value.length <= parseInt(ruleValue),
+                            message: this.getFieldLabel(fieldName) + ` must be less than ${ruleValue} characters`
+                        };
+                        
+                    case 'email':
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        return {
+                            isValid: emailRegex.test(value) || value.length === 0,
+                            message: 'Please enter a valid email address'
+                        };
+                        
+                    case 'phone':
+                        if (value.length === 0) return { isValid: true, message: '' };
+                        const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+                        return {
+                            isValid: phoneRegex.test(value.replace(/\s/g, '')),
+                            message: 'Please enter a valid phone number'
+                        };
+                        
+                    case 'nameFormat':
+                        const nameRegex = /^[a-zA-Z\s\-\.\']+$/;
+                        return {
+                            isValid: nameRegex.test(value) || value.length === 0,
+                            message: 'Name can only contain letters, spaces, hyphens, dots, and apostrophes'
+                        };
+                        
+                    default:
+                        return { isValid: true, message: '' };
+                }
+            }
+            
+            getFieldLabel(fieldName) {
+                const labels = {
+                    name: 'Name',
+                    email: 'Email',
+                    company: 'Company',
+                    phone: 'Phone',
+                    message: 'Message'
+                };
+                return labels[fieldName] || fieldName;
+            }
+            
+            displayValidationResult(fieldName, isValid, errorMessage) {
+                const field = this.fields[fieldName];
+                const element = field.element;
+                const errorElement = field.errorElement;
+                const successElement = field.successElement;
+                const validationIcon = element.parentElement.querySelector('.validation-icon');
+                
+                // Clear previous states
+                element.classList.remove('valid', 'invalid');
+                if (validationIcon) {
+                    validationIcon.classList.remove('valid', 'invalid');
+                }
+                
+                if (errorElement) {
+                    errorElement.classList.remove('show');
+                    errorElement.textContent = '';
+                }
+                
+                if (successElement) {
+                    successElement.classList.remove('show');
+                    successElement.textContent = '';
+                }
+                
+                // Apply new state
+                if (element.value.trim().length > 0) {
+                    if (isValid) {
+                        element.classList.add('valid');
+                        if (validationIcon) {
+                            validationIcon.classList.add('valid');
+                        }
+                        
+                        // Show success message for optional fields when filled correctly
+                        if (!field.rules.includes('required') && successElement) {
+                            successElement.textContent = this.getFieldLabel(fieldName) + ' looks good!';
+                            successElement.classList.add('show');
+                        }
+                    } else {
+                        element.classList.add('invalid');
+                        if (validationIcon) {
+                            validationIcon.classList.add('invalid');
+                        }
+                        
+                        if (errorElement) {
+                            errorElement.textContent = errorMessage;
+                            errorElement.classList.add('show');
+                        }
+                    }
+                }
+            }
+            
+            clearFieldValidation(fieldName) {
+                const field = this.fields[fieldName];
+                const element = field.element;
+                const errorElement = field.errorElement;
+                const successElement = field.successElement;
+                const validationIcon = element.parentElement.querySelector('.validation-icon');
+                
+                // Only clear if field is invalid (keep valid state)
+                if (element.classList.contains('invalid')) {
+                    element.classList.remove('invalid');
+                    if (validationIcon) {
+                        validationIcon.classList.remove('invalid');
+                    }
+                    if (errorElement) {
+                        errorElement.classList.remove('show');
+                    }
+                }
+            }
+            
+            validateForm() {
+                let isFormValid = true;
+                const requiredFields = [];
+                
+                Object.keys(this.fields).forEach(fieldName => {
+                    const isFieldValid = this.validateField(fieldName);
+                    if (!isFieldValid && this.fields[fieldName].rules.includes('required')) {
+                        isFormValid = false;
+                        requiredFields.push(fieldName);
+                    }
+                });
+                
+                return { isValid: isFormValid, invalidFields: requiredFields };
+            }
+            
+            updateSubmitButton() {
+                const validation = this.validateForm();
+                const hasRequiredFields = Object.keys(this.fields)
+                    .filter(fieldName => this.fields[fieldName].rules.includes('required'))
+                    .every(fieldName => this.fields[fieldName].element.value.trim().length > 0);
+                
+                if (hasRequiredFields && validation.isValid && !this.isSubmitting) {
+                    this.submitBtn.disabled = false;
+                } else {
+                    this.submitBtn.disabled = true;
+                }
+            }
+            
+            async handleSubmit() {
+                if (this.isSubmitting) return;
+                
+                const validation = this.validateForm();
+                if (!validation.isValid) {
+                    this.showFormStatus('Please correct the errors above before submitting.', 'error');
+                    
+                    // Focus on first invalid field
+                    if (validation.invalidFields.length > 0) {
+                        this.fields[validation.invalidFields[0]].element.focus();
+                    }
+                    return;
+                }
+                
+                this.isSubmitting = true;
+                this.submitBtn.disabled = true;
+                this.submitBtn.classList.add('loading');
+                this.submitBtn.textContent = '';
+                
+                try {
+                    // Simulate API call
+                    await this.submitForm();
+                    
+                    // Success
+                    this.submitBtn.classList.remove('loading');
+                    this.submitBtn.classList.add('success-animation');
+                    
+                    this.showFormStatus('✓ Thank you! Your message has been received. We\'ll get back to you within 24 hours.', 'success');
+                    
+                    // Reset form
+                    this.form.reset();
+                    this.clearAllValidations();
+                    
+                    // Reset button after animation
+                    setTimeout(() => {
+                        this.submitBtn.classList.remove('success-animation');
+                        this.submitBtn.textContent = 'Send Message';
+                        this.isSubmitting = false;
+                        this.updateSubmitButton();
+                        
+                        // Hide status message after 8 seconds
+                        setTimeout(() => {
+                            this.hideFormStatus();
+                        }, 8000);
+                    }, 2000);
+                    
+                } catch (error) {
+                    // Error handling
+                    this.submitBtn.classList.remove('loading');
+                    this.submitBtn.textContent = 'Send Message';
+                    this.isSubmitting = false;
+                    this.updateSubmitButton();
+                    
+                    this.showFormStatus('❌ Sorry, there was an error sending your message. Please try again or contact us directly.', 'error');
+                    
+                    setTimeout(() => {
+                        this.hideFormStatus();
+                    }, 8000);
+                }
+            }
+            
+            async submitForm() {
+                // Simulate API call delay
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        // Simulate 95% success rate
+                        if (Math.random() > 0.05) {
+                            resolve();
+                        } else {
+                            reject(new Error('Network error'));
+                        }
+                    }, 1500);
+                });
+            }
+            
+            clearAllValidations() {
+                Object.keys(this.fields).forEach(fieldName => {
+                    const field = this.fields[fieldName];
+                    const element = field.element;
+                    const errorElement = field.errorElement;
+                    const successElement = field.successElement;
+                    const validationIcon = element.parentElement.querySelector('.validation-icon');
+                    
+                    element.classList.remove('valid', 'invalid');
+                    if (validationIcon) {
+                        validationIcon.classList.remove('valid', 'invalid');
+                    }
+                    if (errorElement) {
+                        errorElement.classList.remove('show');
+                        errorElement.textContent = '';
+                    }
+                    if (successElement) {
+                        successElement.classList.remove('show');
+                        successElement.textContent = '';
+                    }
+                });
+            }
+            
+            showFormStatus(message, type) {
+                this.formStatus.textContent = message;
+                this.formStatus.className = `show ${type}`;
+            }
+            
+            hideFormStatus() {
+                this.formStatus.classList.remove('show', 'success', 'error');
+            }
+        }
+        
+        // Initialize form validator
+        let formValidator;
+        document.addEventListener('DOMContentLoaded', () => {
+            formValidator = new FormValidator('contactForm');
+            
+            // Set footer year
+            const yearElement = document.getElementById('year');
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
         });
-
-        // WhatsApp functionality
+        
+        // Contact card functionality
         function openWhatsApp() {
             const phoneNumber = '919876543210';
             const message = encodeURIComponent('Hello Venkat Enterprises, I would like to inquire about your products and services.');
@@ -781,8 +1338,7 @@
             
             window.open(whatsappURL, '_blank');
         }
-
-        // Email functionality
+        
         function openEmail() {
             const email = 'sales@venkatenterprises.example';
             const subject = encodeURIComponent('Inquiry about Products and Services');
@@ -803,8 +1359,7 @@ Thank you.`);
             
             window.location.href = emailURL;
         }
-
-        // Location functionality
+        
         function showLocationInfo() {
             const location = 'Chennai, Tamil Nadu, India';
             const googleMapsURL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
@@ -821,12 +1376,42 @@ Thank you.`);
                 window.open(googleMapsURL, '_blank');
             }
         }
-
+        
         // Prevent link clicks from triggering card clicks
         document.querySelectorAll('.contact-card a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.stopPropagation();
             });
+        });
+        
+        // Add input focus animations
+        document.querySelectorAll('.contact-form input, .contact-form textarea').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe contact cards for staggered animations
+        document.querySelectorAll('.contact-card').forEach(card => {
+            observer.observe(card);
         });
     </script>
 </body>
