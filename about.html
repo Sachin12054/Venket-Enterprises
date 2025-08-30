@@ -16,10 +16,11 @@
     .about-content h2 { color: #ff6d00; margin: 24px 0 12px 0; font-size: 1.4rem; }
     .about-content ul { margin: 16px 0; padding-left: 24px; }
     .about-content li { margin-bottom: 8px; }
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 32px 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0; }
     .stat-card { background: #fff3e0; border-radius: 12px; padding: 24px; text-align: center; box-shadow: 0 2px 8px rgba(255,145,0,0.06); }
     .stat-card .number { font-size: 2.5rem; font-weight: 700; color: #ff9100; margin-bottom: 8px; }
     .stat-card .label { color: #ff6d00; font-weight: 600; }
+    .stat-card:nth-child(4){grid-column: 2;}
     @media (max-width: 768px) { .about-main { padding: 18px 6vw; } .stats-grid { grid-template-columns: 1fr; gap: 16px; } }
   </style>
 </head>
