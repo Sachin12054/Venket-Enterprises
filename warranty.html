@@ -11,12 +11,38 @@
       box-sizing: border-box;
     }
     
+    :root {
+      --primary-color: #ff9100;
+      --bg-primary: #f5f7fa;
+      --bg-secondary: #c3cfe2;
+      --text-dark: #333;
+      --text-light: #666;
+      --bg-white: #fff;
+      --bg-light: #f0f0f0;
+      --border-color: #e0e0e0;
+      --shadow-light: 0 2px 20px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    .dark-theme {
+      --bg-primary: #1a1d23;
+      --bg-secondary: #2d3748;
+      --text-dark: #f8f9fa;
+      --text-light: #adb5bd;
+      --bg-white: #212529;
+      --bg-light: #343a40;
+      --border-color: #495057;
+      --shadow-light: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    
     body {
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
       min-height: 100vh;
       margin: 0;
       padding: 0;
       font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      transition: var(--transition);
     }
     
     .professional-nav {
@@ -284,7 +310,7 @@
     .warranty-form input, .warranty-form textarea, .warranty-form select { 
       width: 100%; 
       padding: 16px 20px; 
-      border: 2px solid #e0e0e0; 
+      border: 1px solid #e0e0e0; 
       border-radius: 12px; 
       font-size: 1rem; 
       background: #fff;
@@ -295,19 +321,22 @@
     .warranty-form input:focus, .warranty-form textarea:focus, .warranty-form select:focus {
       outline: none;
       border-color: #ff9100;
-      box-shadow: 0 0 0 4px rgba(255,145,0,0.1);
+      border-width: 2px;
+      box-shadow: 0 0 0 2px rgba(255,145,0,0.1);
       transform: translateY(-2px);
     }
     
     .warranty-form input.invalid, .warranty-form textarea.invalid, .warranty-form select.invalid {
       border-color: #e53e3e;
-      box-shadow: 0 0 0 4px rgba(229, 62, 62, 0.1);
+      border-width: 2px;
+      box-shadow: 0 0 0 2px rgba(229, 62, 62, 0.1);
       animation: shake 0.5s ease-in-out;
     }
     
     .warranty-form input.valid, .warranty-form textarea.valid, .warranty-form select.valid {
       border-color: #38a169;
-      box-shadow: 0 0 0 4px rgba(56, 161, 105, 0.1);
+      border-width: 2px;
+      box-shadow: 0 0 0 2px rgba(56, 161, 105, 0.1);
     }
     
     .warranty-form textarea { 
@@ -371,6 +400,165 @@
     .validation-icon.invalid {
       color: #e53e3e;
       opacity: 1;
+    }
+
+    /* Updated validation structure */
+    .input-container {
+      position: relative;
+    }
+
+    .input-container input,
+    .input-container textarea {
+      padding-right: 45px;
+    }
+
+    .input-container input.valid,
+    .input-container textarea.valid {
+      border-color: #38a169;
+      border-width: 2px;
+      box-shadow: 0 0 0 1px rgba(56, 161, 105, 0.1);
+    }
+
+    .input-container input.invalid,
+    .input-container textarea.invalid {
+      border-color: #e53e3e;
+      border-width: 2px;
+      box-shadow: 0 0 0 1px rgba(229, 62, 62, 0.1);
+    }
+
+    .validation-icon::before {
+      content: "✓";
+      opacity: 0;
+    }
+
+    .validation-icon.valid::before {
+      content: "✓";
+      color: #38a169;
+      opacity: 1;
+    }
+
+    .validation-icon.invalid::before {
+      content: "✕";
+      color: #e53e3e;
+      opacity: 1;
+    }
+
+    .validation-message {
+      font-size: 0.875rem;
+      margin-top: 6px;
+      opacity: 0;
+      transition: all 0.3s ease;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .validation-message.show {
+      opacity: 1;
+      height: auto;
+      padding: 5px 0;
+    }
+
+    .validation-message.error {
+      color: #e53e3e;
+    }
+
+    .validation-message.success {
+      color: #38a169;
+    }
+
+    .required {
+      color: #e53e3e;
+      font-weight: bold;
+    }
+
+    .form-status {
+      text-align: center;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: 600;
+      opacity: 0;
+      transition: all 0.3s ease;
+      display: none;
+    }
+
+    .form-status.show {
+      opacity: 1;
+    }
+
+    .form-status.success {
+      background-color: #f0fff4;
+      color: #38a169;
+      border: 1px solid #38a169;
+    }
+
+    .dark-theme .form-status.success {
+      background-color: #1a2e1a;
+      color: #38a169;
+      border-color: #38a169;
+    }
+
+    .form-status.error {
+      background-color: #fff5f5;
+      color: #e53e3e;
+      border: 1px solid #e53e3e;
+    }
+
+    .dark-theme .form-status.error {
+      background-color: #2e1a1a;
+      color: #e53e3e;
+      border-color: #e53e3e;
+    }
+
+    .submit-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-text {
+      transition: opacity 0.3s ease;
+    }
+
+    .submit-btn.loading .btn-text {
+      opacity: 0;
+    }
+
+    .submit-btn.loading .loading-spinner {
+      opacity: 1;
+    }
+
+    .loading-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .loading-spinner::before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .submit-btn.success-animation {
+      background: #38a169;
+      animation: successPulse 0.6s ease;
+    }
+
+    @keyframes successPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
     
     .warranty-form button {
@@ -729,6 +917,28 @@
     <a href="contact.html">Contact</a>
     <a href="quote.html">Quote</a>
     <a href="warranty.html" class="active">Warranty</a>
+    
+    <!-- Theme Toggle -->
+    <button id="themeToggle" style="background: none; border: none; padding: 8px; cursor: pointer; border-radius: 50%; transition: all 0.3s ease; color: #fff; margin-left: 20px;" aria-label="Toggle dark mode">
+      <span class="theme-icon" aria-hidden="true">
+        <svg class="icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+        </svg>
+        <svg class="icon-sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <circle cx="12" cy="12" r="5"/>
+          <g>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </g>
+        </svg>
+      </span>
+    </button>
   </nav>
   
   <div class="warranty-main">
@@ -825,57 +1035,87 @@
       <h3>Warranty Claim Form</h3>
       <form id="warrantyForm" novalidate>
         <div class="form-group">
-          <label for="productName">Product Name/Model *</label>
-          <input type="text" id="productName" name="productName" required placeholder="Enter product name or model number" autocomplete="off">
-          <i class="fas fa-check validation-icon"></i>
-          <span class="error-message" id="productNameError"></span>
+          <label for="productName">Product Name/Model <span class="required">*</span></label>
+          <div class="input-container">
+            <input type="text" id="productName" name="productName" required minlength="2" maxlength="100"
+                   placeholder="Enter product name or model number" autocomplete="off">
+            <span class="validation-icon"></span>
+          </div>
+          <div class="validation-message error" id="productNameError"></div>
+          <div class="validation-message success" id="productNameSuccess"></div>
         </div>
         
         <div class="form-group">
-          <label for="serialNumber">Serial Number *</label>
-          <input type="text" id="serialNumber" name="serialNumber" required placeholder="Enter serial number from product label" autocomplete="off">
-          <i class="fas fa-check validation-icon"></i>
-          <span class="error-message" id="serialNumberError"></span>
+          <label for="serialNumber">Serial Number <span class="required">*</span></label>
+          <div class="input-container">
+            <input type="text" id="serialNumber" name="serialNumber" required minlength="3" maxlength="50"
+                   placeholder="Enter serial number from product label" autocomplete="off">
+            <span class="validation-icon"></span>
+          </div>
+          <div class="validation-message error" id="serialNumberError"></div>
+          <div class="validation-message success" id="serialNumberSuccess"></div>
         </div>
         
         <div class="form-group">
-          <label for="purchaseDate">Purchase Date *</label>
-          <input type="date" id="purchaseDate" name="purchaseDate" required autocomplete="off">
-          <i class="fas fa-check validation-icon"></i>
-          <span class="error-message" id="purchaseDateError"></span>
+          <label for="purchaseDate">Purchase Date <span class="required">*</span></label>
+          <div class="input-container">
+            <input type="date" id="purchaseDate" name="purchaseDate" required autocomplete="off">
+            <span class="validation-icon"></span>
+          </div>
+          <div class="validation-message error" id="purchaseDateError"></div>
+          <div class="validation-message success" id="purchaseDateSuccess"></div>
         </div>
         
         <div class="form-group">
-          <label for="customerName">Customer Name *</label>
-          <input type="text" id="customerName" name="customerName" required placeholder="Enter your full name" autocomplete="name">
-          <i class="fas fa-check validation-icon"></i>
-          <span class="error-message" id="customerNameError"></span>
+          <label for="customerName">Customer Name <span class="required">*</span></label>
+          <div class="input-container">
+            <input type="text" id="customerName" name="customerName" required minlength="2" maxlength="50"
+                   placeholder="Enter your full name" autocomplete="name">
+            <span class="validation-icon"></span>
+          </div>
+          <div class="validation-message error" id="customerNameError"></div>
+          <div class="validation-message success" id="customerNameSuccess"></div>
         </div>
         
         <div class="form-group">
-          <label for="customerEmail">Email Address *</label>
-          <input type="email" id="customerEmail" name="customerEmail" required placeholder="Enter your email address" autocomplete="email">
-          <i class="fas fa-check validation-icon"></i>
-          <span class="error-message" id="customerEmailError"></span>
+          <label for="customerEmail">Email Address <span class="required">*</span></label>
+          <div class="input-container">
+            <input type="email" id="customerEmail" name="customerEmail" required maxlength="100"
+                   placeholder="Enter your email address" autocomplete="email">
+            <span class="validation-icon"></span>
+          </div>
+          <div class="validation-message error" id="customerEmailError"></div>
+          <div class="validation-message success" id="customerEmailSuccess"></div>
         </div>
         
         <div class="form-group">
-          <label for="customerPhone">Phone Number *</label>
-          <input type="tel" id="customerPhone" name="customerPhone" required placeholder="Enter your contact number" autocomplete="tel">
-          <i class="fas fa-check validation-icon"></i>
-          <span class="error-message" id="customerPhoneError"></span>
+          <label for="customerPhone">Phone Number <span class="required">*</span></label>
+          <div class="input-container">
+            <input type="tel" id="customerPhone" name="customerPhone" required minlength="10" maxlength="15"
+                   placeholder="Enter your contact number" autocomplete="tel">
+            <span class="validation-icon"></span>
+          </div>
+          <div class="validation-message error" id="customerPhoneError"></div>
+          <div class="validation-message success" id="customerPhoneSuccess"></div>
         </div>
         
         <div class="form-group has-textarea">
-          <label for="issueDescription">Issue Description *</label>
-          <textarea id="issueDescription" name="issueDescription" required placeholder="Please describe the issue in detail including when it started, error messages, and any troubleshooting steps you've tried..."></textarea>
-          <i class="fas fa-check validation-icon"></i>
-          <span class="error-message" id="issueDescriptionError"></span>
+          <label for="issueDescription">Issue Description <span class="required">*</span></label>
+          <div class="input-container">
+            <textarea id="issueDescription" name="issueDescription" required minlength="10" maxlength="1000"
+                      placeholder="Please describe the issue in detail including when it started, error messages, and any troubleshooting steps you've tried..."></textarea>
+            <span class="validation-icon"></span>
+          </div>
+          <div class="validation-message error" id="issueDescriptionError"></div>
+          <div class="validation-message success" id="issueDescriptionSuccess"></div>
         </div>
         
-        <button type="submit" id="submitBtn">Submit Warranty Claim</button>
+        <button type="submit" class="submit-btn">
+          <span class="btn-text">Submit Warranty Claim</span>
+          <span class="loading-spinner"></span>
+        </button>
       </form>
-      <div id="formStatus"></div>
+      <div id="formStatus" class="form-status"></div>
     </div>
   </div>
   
@@ -1332,11 +1572,8 @@
       }
     }
     
-    // Initialize warranty form validator
-    let warrantyFormValidator;
+    // Initialize universal form validator
     document.addEventListener('DOMContentLoaded', () => {
-      warrantyFormValidator = new WarrantyFormValidator('warrantyForm');
-      
       // Set footer year
       const yearElement = document.getElementById('year');
       if (yearElement) {
@@ -1374,5 +1611,11 @@
       observer.observe(element);
     });
   </script>
+  
+  <!-- Form Validation Script -->
+  <script src="js/form-validation.js"></script>
+  
+  <!-- Theme Management Script -->
+  <script src="js/theme.js"></script>
 </body>
 </html>

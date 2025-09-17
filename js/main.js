@@ -6,7 +6,7 @@ class VenkatEnterprisesApp {
         this.productsPerPage = 12;
         this.currentPage = 1;
         this.isLoading = false;
-        this.darkMode = localStorage.getItem('darkMode') === 'true';
+        // Theme is now managed by global theme.js
     // Cart and paymentHistory removed
         
         // This will store the function reference to remove the event listener later
@@ -16,7 +16,7 @@ class VenkatEnterprisesApp {
     }
 
     async init() {
-        this.initTheme();
+        // Theme is now handled by global theme.js
         this.initEventListeners();
     // Cart and paymentHistory init removed
         await this.loadProducts();
@@ -37,38 +37,8 @@ class VenkatEnterprisesApp {
     }
 
     // ===== THEME MANAGEMENT =====
-    initTheme() {
-        const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
-        
-        if (this.darkMode) {
-            body.classList.add('dark-theme');
-            this.updateThemeIcon(true);
-        }
-
-        themeToggle?.addEventListener('click', () => {
-            this.toggleTheme();
-        });
-    }
-
-    toggleTheme() {
-        const body = document.body;
-        this.darkMode = !this.darkMode;
-        
-        body.classList.toggle('dark-theme', this.darkMode);
-        
-        localStorage.setItem('darkMode', this.darkMode);
-        this.updateThemeIcon(this.darkMode);
-        
-        body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
-        setTimeout(() => {
-            body.style.transition = '';
-        }, 300);
-    }
-
-    updateThemeIcon(isDark) {
-        // No need to manually toggle icons, CSS handles SVG transitions
-    }
+    // Theme management now handled by global theme.js
+    // This class no longer manages theme state
 
     // ===== PRODUCTS DATA LOADING =====
     async loadProducts() {

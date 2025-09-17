@@ -8,16 +8,51 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css" />
   <style>
-    .about-main { max-width: 900px; margin: 48px auto 0 auto; background: #fff; border-radius: 18px; box-shadow: 0 4px 32px rgba(255,145,0,0.08); padding: 36px 32px; }
+    :root {
+      --bg-main: #fff;
+      --text-main: #444;
+      --text-secondary: #555;
+      --bg-stat-card: #fff3e0;
+      --transition: all 0.3s ease;
+    }
+    
+    .dark-theme {
+      --bg-main: #212529;
+      --text-main: #f8f9fa;
+      --text-secondary: #adb5bd;
+      --bg-stat-card: rgba(255, 145, 0, 0.1);
+    }
+    
+    .dark-theme body {
+      background: #1a1d23;
+      color: var(--text-main);
+    }
+    
+    .about-main { 
+      max-width: 900px; 
+      margin: 48px auto 0 auto; 
+      background: var(--bg-main); 
+      border-radius: 18px; 
+      box-shadow: 0 4px 32px rgba(255,145,0,0.08); 
+      padding: 36px 32px;
+      transition: var(--transition);
+    }
     .about-header { text-align: center; margin-bottom: 32px; }
     .about-header h1 { color: #ff9100; font-size: 2.2rem; margin-bottom: 8px; }
-    .about-header p { color: #555; font-size: 1.1rem; }
-    .about-content { line-height: 1.8; color: #444; font-size: 1rem; margin-bottom: 32px; }
+    .about-header p { color: var(--text-secondary); font-size: 1.1rem; }
+    .about-content { line-height: 1.8; color: var(--text-main); font-size: 1rem; margin-bottom: 32px; }
     .about-content h2 { color: #ff6d00; margin: 24px 0 12px 0; font-size: 1.4rem; }
     .about-content ul { margin: 16px 0; padding-left: 24px; }
     .about-content li { margin-bottom: 8px; }
     .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0; }
-    .stat-card { background: #fff3e0; border-radius: 12px; padding: 24px; text-align: center; box-shadow: 0 2px 8px rgba(255,145,0,0.06); }
+    .stat-card { 
+      background: var(--bg-stat-card); 
+      border-radius: 12px; 
+      padding: 24px; 
+      text-align: center; 
+      box-shadow: 0 2px 8px rgba(255,145,0,0.06);
+      transition: var(--transition);
+    }
     .stat-card .number { font-size: 2.5rem; font-weight: 700; color: #ff9100; margin-bottom: 8px; }
     .stat-card .label { color: #ff6d00; font-weight: 600; }
     .stat-card:nth-child(4){grid-column: 2;}
@@ -25,13 +60,35 @@
   </style>
 </head>
 <body>
-  <nav style="background: rgba(0, 0, 0, 0.8); padding: 1rem; text-align: center; margin-bottom: 20px;">
+  <nav style="background: rgba(0, 0, 0, 0.8); padding: 1rem; text-align: center; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 20px;">
     <a href="index.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Home</a>
     <a href="about.html" style="color: #ff9100; text-decoration: none; margin: 0 15px; font-weight: 600;">About</a>
     <a href="catalog.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Catalog</a>
     <a href="contact.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Contact</a>
     <a href="quote.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Quote</a>
     <a href="warranty.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Warranty</a>
+    
+    <!-- Theme Toggle -->
+    <button id="themeToggle" style="background: none; border: none; padding: 8px; cursor: pointer; border-radius: 50%; transition: all 0.3s ease; color: #fff; margin-left: 20px;" aria-label="Toggle dark mode">
+      <span class="theme-icon" aria-hidden="true">
+        <svg class="icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+        </svg>
+        <svg class="icon-sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <circle cx="12" cy="12" r="5"/>
+          <g>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </g>
+        </svg>
+      </span>
+    </button>
   </nav>
   <div class="about-main">
     <div class="about-header">
@@ -153,5 +210,8 @@
       const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
     });
   </script>
+  
+  <!-- Theme Management Script -->
+  <script src="js/theme.js"></script>
 </body>
 </html>

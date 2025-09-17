@@ -8,19 +8,276 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css" />
   <style>
-    .quote-main { max-width: 800px; margin: 48px auto 0 auto; background: #fff; border-radius: 18px; box-shadow: 0 4px 32px rgba(255,145,0,0.08); padding: 36px 32px; }
+    :root {
+      --bg-main: #fff;
+      --text-main: #444;
+      --text-secondary: #555;
+      --bg-card: #fff3e0;
+      --transition: all 0.3s ease;
+    }
+    
+    .dark-theme {
+      --bg-main: #212529;
+      --text-main: #f8f9fa;
+      --text-secondary: #e9ecef;
+      --bg-card: #2d3439;
+    }
+
+    /* ===== FORM VALIDATION STYLES ===== */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .input-container {
+      position: relative;
+    }
+
+    .input-container input,
+    .input-container textarea,
+    .input-container select {
+      width: 100%;
+      padding: 12px 45px 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      background: var(--bg-main);
+      color: var(--text-main);
+    }
+
+    .input-container input:focus,
+    .input-container textarea:focus,
+    .input-container select:focus {
+      outline: none;
+      border-color: #ff9100;
+      border-width: 2px;
+      box-shadow: 0 0 0 2px rgba(255, 145, 0, 0.1);
+    }
+
+    .input-container input.valid,
+    .input-container textarea.valid,
+    .input-container select.valid {
+      border-color: #28a745;
+      border-width: 2px;
+      box-shadow: 0 0 0 1px rgba(40, 167, 69, 0.1);
+    }
+
+    .input-container input.invalid,
+    .input-container textarea.invalid,
+    .input-container select.invalid {
+      border-color: #dc3545;
+      border-width: 2px;
+      box-shadow: 0 0 0 1px rgba(220, 53, 69, 0.1);
+    }
+
+    .validation-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .validation-icon.valid::before {
+      content: "✓";
+      color: #28a745;
+      opacity: 1;
+    }
+
+    .validation-icon.invalid::before {
+      content: "✕";
+      color: #dc3545;
+      opacity: 1;
+    }
+
+    .validation-message {
+      font-size: 14px;
+      margin-top: 8px;
+      opacity: 0;
+      transition: all 0.3s ease;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .validation-message.show {
+      opacity: 1;
+      height: auto;
+      padding: 5px 0;
+    }
+
+    .validation-message.error {
+      color: #dc3545;
+    }
+
+    .validation-message.success {
+      color: #28a745;
+    }
+
+    .required {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    .form-status {
+      text-align: center;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: 600;
+      opacity: 0;
+      transition: all 0.3s ease;
+      display: none;
+    }
+
+    .form-status.show {
+      opacity: 1;
+    }
+
+    .form-status.success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .dark-theme .form-status.success {
+      background-color: #1a2e1a;
+      color: #28a745;
+      border-color: #28a745;
+    }
+
+    .form-status.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .dark-theme .form-status.error {
+      background-color: #2e1a1a;
+      color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .submit-btn {
+      position: relative;
+      background: linear-gradient(135deg, #ff9100, #e68900);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #e68900, #cc7a00);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 145, 0, 0.3);
+    }
+
+    .submit-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .submit-btn.loading .btn-text {
+      opacity: 0;
+    }
+
+    .submit-btn.loading .loading-spinner {
+      opacity: 1;
+    }
+
+    .loading-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .loading-spinner::before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .submit-btn.success-animation {
+      background: #28a745;
+      animation: successPulse 0.6s ease;
+    }
+
+    @keyframes successPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .dark-theme {
+      --text-secondary: #adb5bd;
+      --bg-card: rgba(255, 145, 0, 0.1);
+    }
+    
+    .dark-theme body {
+      background: #1a1d23;
+      color: var(--text-main);
+    }
+    
+    .quote-main { 
+      max-width: 800px; 
+      margin: 48px auto 0 auto; 
+      background: var(--bg-main); 
+      border-radius: 18px; 
+      box-shadow: 0 4px 32px rgba(255,145,0,0.08); 
+      padding: 36px 32px;
+      transition: var(--transition);
+    }
     .quote-header { text-align: center; margin-bottom: 32px; }
     .quote-header h1 { color: #ff9100; font-size: 2.2rem; margin-bottom: 8px; }
-    .quote-header p { color: #555; font-size: 1.1rem; }
+    .quote-header p { color: var(--text-secondary); font-size: 1.1rem; }
     .quote-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-bottom: 32px; }
-    .quote-card { background: #fff3e0; border-radius: 12px; padding: 24px; text-align: center; box-shadow: 0 2px 8px rgba(255,145,0,0.06); cursor: pointer; transition: all 0.2s; }
+    .quote-card { 
+      background: var(--bg-card); 
+      border-radius: 12px; 
+      padding: 24px; 
+      text-align: center; 
+      box-shadow: 0 2px 8px rgba(255,145,0,0.06); 
+      cursor: pointer; 
+      transition: var(--transition);
+    }
     .quote-card:hover { transform: translateY(-4px); box-shadow: 0 4px 16px rgba(255,145,0,0.12); }
     .quote-card i { font-size: 2.5rem; color: #ff9100; margin-bottom: 16px; }
     .quote-card h3 { color: #ff6d00; margin-bottom: 8px; font-size: 1.2rem; }
-    .quote-card p { color: #444; font-size: 0.95rem; }
+    .quote-card p { color: var(--text-main); font-size: 0.95rem; }
     .quote-form { margin-top: 24px; }
     .quote-form label { display: block; margin-bottom: 6px; color: #ff9100; font-weight: 600; }
-    .quote-form input, .quote-form textarea, .quote-form select { width: 100%; padding: 12px; border: 1.5px solid #ff9100; border-radius: 8px; margin-bottom: 18px; font-size: 1rem; background: #fff; }
+    .quote-form input, .quote-form textarea, .quote-form select { 
+      width: 100%; 
+      padding: 12px; 
+      border: 1.5px solid #ff9100; 
+      border-radius: 8px; 
+      margin-bottom: 18px; 
+      font-size: 1rem; 
+      background: var(--bg-main);
+      color: var(--text-main);
+      transition: var(--transition);
+    }
     .quote-form textarea { min-height: 120px; resize: vertical; }
     .quote-form button { background: #ff9100; color: #fff; border: none; border-radius: 8px; padding: 12px 32px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: background 0.18s; }
     .quote-form button:hover { background: #ff6d00; }
@@ -28,13 +285,35 @@
   </style>
 </head>
 <body>
-  <nav style="background: rgba(0, 0, 0, 0.8); padding: 1rem; text-align: center; margin-bottom: 20px;">
+  <nav style="background: rgba(0, 0, 0, 0.8); padding: 1rem; text-align: center; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 20px;">
     <a href="index.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Home</a>
     <a href="about.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">About</a>
     <a href="catalog.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Catalog</a>
     <a href="contact.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Contact</a>
     <a href="quote.html" style="color: #ff9100; text-decoration: none; margin: 0 15px; font-weight: 600;">Quote</a>
     <a href="warranty.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Warranty</a>
+    
+    <!-- Theme Toggle -->
+    <button id="themeToggle" style="background: none; border: none; padding: 8px; cursor: pointer; border-radius: 50%; transition: all 0.3s ease; color: #fff; margin-left: 20px;" aria-label="Toggle dark mode">
+      <span class="theme-icon" aria-hidden="true">
+        <svg class="icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+        </svg>
+        <svg class="icon-sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <circle cx="12" cy="12" r="5"/>
+          <g>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </g>
+        </svg>
+      </span>
+    </button>
   </nav>
   <div class="quote-main">
     <div class="quote-header">
@@ -62,39 +341,98 @@
     
     <form class="quote-form" id="quoteForm" style="display:none;">
       <h3 style="color: #ff9100; margin-bottom: 20px;">Email Quote Request</h3>
-      <label for="companyName">Company Name</label>
-      <input type="text" id="companyName" name="companyName" required>
       
-      <label for="contactPerson">Contact Person</label>
-      <input type="text" id="contactPerson" name="contactPerson" required>
+      <div class="form-group">
+        <label for="companyName">Company Name <span class="required">*</span></label>
+        <div class="input-container">
+          <input type="text" id="companyName" name="companyName" required minlength="2" maxlength="100" 
+                 placeholder="Enter your company name">
+          <span class="validation-icon"></span>
+        </div>
+        <div class="validation-message error" id="companyNameError"></div>
+        <div class="validation-message success" id="companyNameSuccess"></div>
+      </div>
       
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" required>
+      <div class="form-group">
+        <label for="contactPerson">Contact Person <span class="required">*</span></label>
+        <div class="input-container">
+          <input type="text" id="contactPerson" name="contactPerson" required minlength="2" maxlength="50"
+                 placeholder="Enter contact person name">
+          <span class="validation-icon"></span>
+        </div>
+        <div class="validation-message error" id="contactPersonError"></div>
+        <div class="validation-message success" id="contactPersonSuccess"></div>
+      </div>
       
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" name="phone" required>
+      <div class="form-group">
+        <label for="email">Email Address <span class="required">*</span></label>
+        <div class="input-container">
+          <input type="email" id="email" name="email" required maxlength="100"
+                 placeholder="Enter your email address">
+          <span class="validation-icon"></span>
+        </div>
+        <div class="validation-message error" id="emailError"></div>
+        <div class="validation-message success" id="emailSuccess"></div>
+      </div>
       
-      <label for="category">Product Category</label>
-      <select id="category" name="category" required>
-        <option value="">Select Category</option>
-        <option value="Survey">Survey Equipment</option>
-        <option value="Civil QC Lab">Civil QC Lab</option>
-        <option value="Construction">Construction Tools</option>
-        <option value="Safety">Safety Equipment</option>
-        <option value="Power Tools">Power Tools</option>
-        <option value="Mixed">Mixed Categories</option>
-      </select>
+      <div class="form-group">
+        <label for="phone">Phone Number <span class="required">*</span></label>
+        <div class="input-container">
+          <input type="tel" id="phone" name="phone" required minlength="10" maxlength="15"
+                 placeholder="Enter your phone number">
+          <span class="validation-icon"></span>
+        </div>
+        <div class="validation-message error" id="phoneError"></div>
+        <div class="validation-message success" id="phoneSuccess"></div>
+      </div>
       
-      <label for="requirements">Detailed Requirements</label>
-      <textarea id="requirements" name="requirements" placeholder="Please list specific products, quantities, delivery location, and any special requirements..." required></textarea>
+      <div class="form-group">
+        <label for="category">Product Category <span class="required">*</span></label>
+        <div class="input-container">
+          <select id="category" name="category" required>
+            <option value="">Select Category</option>
+            <option value="Survey">Survey Equipment</option>
+            <option value="Civil QC Lab">Civil QC Lab</option>
+            <option value="Construction">Construction Tools</option>
+            <option value="Safety">Safety Equipment</option>
+            <option value="Power Tools">Power Tools</option>
+            <option value="Mixed">Mixed Categories</option>
+          </select>
+          <span class="validation-icon"></span>
+        </div>
+        <div class="validation-message error" id="categoryError"></div>
+        <div class="validation-message success" id="categorySuccess"></div>
+      </div>
       
-      <label for="timeline">Required Timeline</label>
-      <input type="text" id="timeline" name="timeline" placeholder="e.g., Within 2 weeks, Urgent, etc.">
+      <div class="form-group">
+        <label for="requirements">Detailed Requirements <span class="required">*</span></label>
+        <div class="input-container">
+          <textarea id="requirements" name="requirements" required minlength="10" maxlength="1000"
+                    placeholder="Please list specific products, quantities, delivery location, and any special requirements..."></textarea>
+          <span class="validation-icon"></span>
+        </div>
+        <div class="validation-message error" id="requirementsError"></div>
+        <div class="validation-message success" id="requirementsSuccess"></div>
+      </div>
       
-      <button type="submit">Send Quote Request</button>
+      <div class="form-group">
+        <label for="timeline">Required Timeline</label>
+        <div class="input-container">
+          <input type="text" id="timeline" name="timeline" maxlength="100"
+                 placeholder="e.g., Within 2 weeks, Urgent, etc.">
+          <span class="validation-icon"></span>
+        </div>
+        <div class="validation-message error" id="timelineError"></div>
+        <div class="validation-message success" id="timelineSuccess"></div>
+      </div>
+      
+      <button type="submit" class="submit-btn">
+        <span class="btn-text">Send Quote Request</span>
+        <span class="loading-spinner"></span>
+      </button>
     </form>
     
-    <div id="formStatus" style="text-align:center;margin-top:12px;color:#ff9100;font-weight:600;"></div>
+    <div id="formStatus" class="form-status"></div>
   </div>
   
   <footer class="footer">
@@ -174,15 +512,15 @@
       window.location.href = "tel:+919876543210";
     }
     
-    document.getElementById('quoteForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      document.getElementById('formStatus').textContent = 'Thank you! Your quote request has been submitted. We will respond within 24 hours.';
-      this.reset();
-    });
-    
     document.addEventListener('DOMContentLoaded', () => {
       const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
     });
   </script>
+  
+  <!-- Form Validation Script -->
+  <script src="js/form-validation.js"></script>
+  
+  <!-- Theme Management Script -->
+  <script src="js/theme.js"></script>
 </body>
 </html>
