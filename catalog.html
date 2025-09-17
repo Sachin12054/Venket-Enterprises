@@ -5,34 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Venket Enterprises | Product Catalog</title>
   <link rel="stylesheet" href="css/catalog.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <nav style="background: rgba(0, 0, 0, 0.8); padding: 1rem; text-align: center; margin-bottom: 20px;">
-    <a href="index.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Home</a>
-    <a href="about.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">About</a>
-    <a href="catalog.html" style="color: #ff9100; text-decoration: none; margin: 0 15px; font-weight: 600;">Catalog</a>
-    <a href="contact.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Contact</a>
-    <a href="quote.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Quote</a>
-    <a href="warranty.html" style="color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600;">Warranty</a>
+  <!-- Professional Navigation -->
+  <nav class="professional-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="catalog.html" class="active">Catalog</a>
+    <a href="contact.html">Contact</a>
+    <a href="quote.html">Quote</a>
+    <a href="warranty.html">Warranty</a>
   </nav>
+
+  <!-- Simple Header -->
+  <header class="simple-header">
+    <div class="header-content">
+      <h1>Product Catalog</h1>
+      <p class="subtitle">Discover our premium selection of high-quality products</p>
+    </div>
+  </header>
+
   <div class="catalog-outer">
     <div class="catalog-container">
-      <header class="hero-header animated-fadein">
-        <div class="hero-content">
-          <h1><span class="brand">Venket Enterprises</span> <span class="catalog-title">Product Catalog</span></h1>
-          <p class="subtitle">Discover our best products for your business needs</p>
-        </div>
-      </header>
-      <section class="catalog-controls animated-slidein">
-        <div class="category-bar-scroll" id="categoryBar" aria-label="Product Categories">
-          <!-- Category buttons injected by JS -->
-        </div>
-        <div class="catalog-search-sort">
+      <!-- Search and Controls -->
+      <section class="catalog-controls">
+        <div class="search-container">
           <input type="text" id="search" placeholder="Search products..." aria-label="Search products">
+        </div>
+        <div class="sort-container">
+          <label for="sortSelect">Sort By:</label>
           <select id="sortSelect" aria-label="Sort products">
-            <option value="default">Sort By</option>
+            <option value="default">Featured</option>
             <option value="price-asc">Price: Low to High</option>
             <option value="price-desc">Price: High to Low</option>
             <option value="name-asc">Name: A-Z</option>
@@ -40,21 +45,46 @@
           </select>
         </div>
       </section>
-      <main>
+
+      <!-- Category Bar -->
+      <section class="category-bar-scroll">
+        <div class="category-header">
+          <h2>Browse Categories</h2>
+        </div>
+        <div id="categoryBar" class="category-bar">
+          <!-- Category buttons will be injected by JS -->
+        </div>
+      </section>
+
+      <!-- Product Grid -->
+      <main class="product-section">
         <div id="productContainer" class="product-grid">
-          <!-- Products injected by JS -->
+          <!-- Products will be injected by JS -->
+        </div>
+
+        <!-- No Results Message -->
+        <div class="no-results" id="noResults" style="display: none;">
+          <h3>No products found</h3>
+          <p>Try adjusting your search or filters.</p>
         </div>
       </main>
-      <!-- Modal for product details -->
-      <div id="productModal" class="modal" style="display:none;">
-        <div class="modal-content animated-modal" role="dialog" aria-modal="true" aria-labelledby="modalBody">
-          <span class="close" id="closeModal" tabindex="0" aria-label="Close">&times;</span>
-          <div id="modalBody"></div>
-        </div>
+    </div>
+  </div>
+
+  <!-- Product Modal -->
+  <div id="productModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="modal-close" id="closeModal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Modal content will be injected by JS -->
       </div>
     </div>
   </div>
+
   <script src="js/catalog.js"></script>
 </body>
 </html>
-

@@ -33,7 +33,7 @@ const products = [
         "sub category":"Measuring Tools",
         "brand":"BOSCH",
         "tags":["POWER & CORDLESS TOOLS,Measuring Tools"],
-        "image":" https://images.thdstatic.com/productImages/e85599de-6408-425c-8f77-15858d20ad26/svn/bosch-laser-distance-measurer-glm165-40-64_1000.jpg"
+        "image":"https://images.thdstatic.com/productImages/e85599de-6408-425c-8f77-15858d20ad26/svn/bosch-laser-distance-measurer-glm165-40-64_1000.jpg"
     },
     {
         "id":4,
@@ -280,7 +280,7 @@ const products = [
         "sub category":"",
         "brand":"ESI",
         "tags":["Construction Equipments"],
-        "image":" https://5.imimg.com/data5/SELLER/Default/2023/10/349434007/SJ/YO/EH/2023408/single-wheel-barrow-500x500.jpg"
+        "image":"https://5.imimg.com/data5/SELLER/Default/2023/10/349434007/SJ/YO/EH/2023408/single-wheel-barrow-500x500.jpg"
     },
     {
         "id":26,
@@ -521,7 +521,7 @@ const products = [
         "sub category":"",
         "brand":"Bon Tool",
         "tags":["Construction Equipments"],
-        "image":" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgwfxHhuL_Ryo2TPl1K-lCwAviL7LWy_L6iA&s"
+        "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgwfxHhuL_Ryo2TPl1K-lCwAviL7LWy_L6iA&s"
     },
     {
         "id":48,
@@ -543,7 +543,7 @@ const products = [
         "sub category":"",
         "brand":"TRICO",
         "tags":["Construction Equipments"],
-        "image":" https://image.made-in-china.com/2f0j00aTcolkiBaVrb/Q235-Shuttering-F-Type-Clamps-Building-Construction-Tools.jpg"
+        "image":"https://image.made-in-china.com/2f0j00aTcolkiBaVrb/Q235-Shuttering-F-Type-Clamps-Building-Construction-Tools.jpg"
     },
     //Aggregates Testing equipments
     {
@@ -555,14 +555,14 @@ const products = [
         "sub category":"Aggregates Testing Equipments",
         "brand":"WAXCON VENTURES",
         "tags":["civil Lab,Aggregates Testing Equipments"],
-        "image":["https://5.imimg.com/data5/XU/IR/WG/SELLER-97113561/aggregate-flakiness-and-elongation-indextester-500x500.jpg"]
+        "image":"https://5.imimg.com/data5/XU/IR/WG/SELLER-97113561/aggregate-flakiness-and-elongation-indextester-500x500.jpg"
     },
     {
         "id":51,
         "name":"Density Basket",
         "description":"Density Basket Knitted for specific gravity or Buoyancy Balance",
         "price":"1200",
-        "category":"civil Lab",
+        "category":"Civil Lab",
         "sub category":"Aggregates Testing Equipments",
         "brand":"ELE INTERNATIONAL",
         "tags":["civil Lab,Aggregates Testing Equipments"],
@@ -573,7 +573,7 @@ const products = [
         "name":"Elongation Gauges",
         "description":"A density basket is a cylindrical wire-mesh basket, typically 20 cm in diameter and height, used in civil engineering and material testing to determine the specific gravity and water absorption of aggregates and bituminous mixtures.",
         "price":"500",
-        "category":"civil Lab",
+        "category":"Civil Lab",
         "sub Category":"Aggregates Testing Equipments",
         "brand":"Microteknic",
         "tags":["civil Lab,Aggregates Testing Equipments"],
@@ -584,7 +584,7 @@ const products = [
         "name":"Los Angeles Testing",
         "description":"The Los Angeles Abrasion Test determines an aggregate's resistance to wear by measuring the percentage of loss after being tumbled in a rotating steel drum with abrasive balls.",
         "price":"47000",
-        "category":"civil Lab",
+        "category":"Civil Lab",
         "sub Category":"Aggregates Testing Equipments",
         "brand":"Humboldt",
         "tags":["civil Lab,Aggregates Testing Equipments"],
@@ -595,7 +595,7 @@ const products = [
         "name":"Riffle Sample Divider",
         "description":"A riffle sample divider is a fractional sub-sampling instrument used for dividing the sample (dry and free-flowing granular particles)",
         "price":"13000",
-        "category":"civil Lab",
+        "category":"Civil Lab",
         "sub Category":"Aggregates Testing Equipments",
         "brand":"Aimil Ltd.india",
         "tags":["civil Lab,Aggregates Testing Equipments"],
@@ -632,7 +632,7 @@ const products = [
         "sub Category":"Aggregates Testing Equipments",
         "brand":"Matest",
         "tags":["civil Lab,Aggregates Testing Equipments"],
-        "image":" https://www.vertexinstruments.com/wp-content/uploads/2017/06/Aggregate-Crushing-Value-Apparatus-1.jpg"
+        "image":"https://www.vertexinstruments.com/wp-content/uploads/2017/06/Aggregate-Crushing-Value-Apparatus-1.jpg"
     },
     //Bitumen Testing Equipment
     {
@@ -710,7 +710,7 @@ const products = [
         "sub Category":"Bitumen Testing Equipment",
         "brand":"Aimil Ltd India",
         "tags":["civil Lab,Bitumen Testing Equipment"],
-        "image":" https://sunlabtech.com/wp-content/uploads/2018/08/Tar-Viscometer-Apparatus-Standard.jpg"
+        "image":"https://sunlabtech.com/wp-content/uploads/2018/08/Tar-Viscometer-Apparatus-Standard.jpg"
     },
     {
         "id":65,
@@ -760,7 +760,12 @@ const sortSelect = document.getElementById("sortSelect");
 
 // Get unique categories from products
 const allCategories = ["All"].concat(
-  Array.from(new Set(products.map(p => p.category)))
+  Array.from(new Set(products.map(p => {
+    // Normalize category names
+    let category = p.category;
+    if (category === "civil Lab") category = "Civil Lab";
+    return category;
+  })))
 );
 let activeCategory = "All";
 let currentSort = "default";
@@ -784,28 +789,36 @@ function renderCategoryBar() {
 
 function getFilteredSortedProducts() {
   let filtered = products.filter(p => {
-    const matchesText = searchInput.value.trim() === "" ||
-      p.name.toLowerCase().includes(searchInput.value.toLowerCase()) ||
-      (p.description && p.description.toLowerCase().includes(searchInput.value.toLowerCase()));
-    const matchesCategory = activeCategory === "All" || p.category === activeCategory;
+    const searchValue = searchInput && searchInput.value ? searchInput.value.trim() : "";
+    const matchesText = searchValue === "" ||
+      p.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+      (p.description && p.description.toLowerCase && p.description.toLowerCase().includes(searchValue.toLowerCase()));
+    
+    // Normalize category for comparison
+    let productCategory = p.category;
+    if (productCategory === "civil Lab") productCategory = "Civil Lab";
+    
+    const matchesCategory = activeCategory === "All" || productCategory === activeCategory;
     return matchesText && matchesCategory;
   });
   // Sorting
-  switch (sortSelect.value) {
-    case "price-asc":
-      filtered = filtered.slice().sort((a, b) => a.price - b.price);
-      break;
-    case "price-desc":
-      filtered = filtered.slice().sort((a, b) => b.price - a.price);
-      break;
-    case "name-asc":
-      filtered = filtered.slice().sort((a, b) => a.name.localeCompare(b.name));
-      break;
-    case "name-desc":
-      filtered = filtered.slice().sort((a, b) => b.name.localeCompare(a.name));
-      break;
-    default:
-      break;
+  if (sortSelect && sortSelect.value) {
+    switch (sortSelect.value) {
+      case "price-asc":
+        filtered = filtered.slice().sort((a, b) => parseInt(a.price) - parseInt(b.price));
+        break;
+      case "price-desc":
+        filtered = filtered.slice().sort((a, b) => parseInt(b.price) - parseInt(a.price));
+        break;
+      case "name-asc":
+        filtered = filtered.slice().sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "name-desc":
+        filtered = filtered.slice().sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      default:
+        break;
+    }
   }
   return filtered;
 }
@@ -813,6 +826,10 @@ function getFilteredSortedProducts() {
 function renderProducts() {
   productContainer.innerHTML = "";
   const filtered = getFilteredSortedProducts();
+  
+  // Update statistics
+  updateStatistics(filtered);
+  
   if (filtered.length === 0) {
     productContainer.innerHTML = "<p>No products found.</p>";
     return;
@@ -821,17 +838,36 @@ function renderProducts() {
     const card = document.createElement("div");
     card.classList.add("product-card");
     card.style.animationDelay = (i * 0.04) + "s";
+    
+    // Handle image array or string
+    const imageUrl = Array.isArray(p.image) ? p.image[0] : p.image;
+    
     card.innerHTML = `
-      <img src="${p.image}" alt="${p.name}">
+      <img src="${imageUrl}" alt="${p.name}">
       <div class="info">
         <h3>${p.name}</h3>
         <p>${p.description}</p>
-        <span class="price">₹${p.price.toLocaleString()}</span>
       </div>
     `;
     card.addEventListener('click', () => showProductModal(p));
     productContainer.appendChild(card);
   });
+}
+
+function updateStatistics(filteredProducts) {
+  const totalProducts = filteredProducts.length;
+  const totalCategories = new Set(filteredProducts.map(p => {
+    let category = p.category;
+    if (category === "civil Lab") category = "Civil Lab";
+    return category;
+  })).size;
+  
+  // Update the statistics in the hero section
+  const productCount = document.querySelector('.stat-number[data-stat="products"]');
+  const categoryCount = document.querySelector('.stat-number[data-stat="categories"]');
+  
+  if (productCount) productCount.textContent = `${totalProducts}+`;
+  if (categoryCount) categoryCount.textContent = `${totalCategories}+`;
 }
 
 // Modal Logic
@@ -840,17 +876,21 @@ function showProductModal(product) {
   if (product.specifications) {
     specs = '<ul style="margin:10px 0 0 0;padding:0 0 0 18px;">' + Object.entries(product.specifications).map(([k,v]) => `<li><strong>${k}:</strong> ${v}</li>`).join('') + '</ul>';
   }
+  
+  // Handle image array or string
+  const imageUrl = Array.isArray(product.image) ? product.image[0] : product.image;
+  
   modalBody.innerHTML = `
   <div class="modal-display">
     <div class="image-block">
-    <img class="modal-product-img" src="${product.image}" alt="${product.name}">
+    <img class="modal-product-img" src="${imageUrl}" alt="${product.name}">
     ${product.featured ? '<span class="modal-badge"><i class="fas fa-star"></i> Featured</span>' : ''}
     
     </div>
     <div class="detail-block">
     <div class="modal-product-title">${product.name}</div>
     <div class="modal-product-desc">${product.description}</div>
-    <div class="modal-product-price">₹${product.price.toLocaleString()}</div>
+    <div class="modal-product-price">₹${parseInt(product.price).toLocaleString()}</div>
     <div style="margin-top:10px;">${product.inStock ? '<span style="color:green;font-weight:600;">In Stock</span>' : '<span style="color:red;font-weight:600;">Out of Stock</span>'}</div>
     
     </div>
@@ -865,13 +905,16 @@ window.onclick = function(event) {
 };
 
 // Event Listeners
-
-searchInput.addEventListener("input", () => {
-  renderProducts();
-});
-if (sortSelect) sortSelect.addEventListener("change", () => {
-  renderProducts();
-});
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    renderProducts();
+  });
+}
+if (sortSelect) {
+  sortSelect.addEventListener("change", () => {
+    renderProducts();
+  });
+}
 
 // Initial Render
 renderCategoryBar();
