@@ -323,19 +323,6 @@ Venket_Enterprises/
 
 ---
 
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
-### **MIT License Summary**
-- ✅ Commercial use allowed
-- ✅ Modification allowed
-- ✅ Distribution allowed
-- ✅ Private use allowed
-- ❗ License and copyright notice required
-
----
-
 ## 🤝 Contributing
 
 We welcome contributions to improve the website! Please:
